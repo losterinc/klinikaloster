@@ -1,5 +1,5 @@
 ---
-import type { Locale } from '@/lib/i18n';
+import { type Locale, isActiveLocale } from '@/lib/i18n';
 
 interface Props {
   title: string;
@@ -20,17 +20,23 @@ const ogImageUrl = ogImage ? new URL(ogImage, site).href : undefined;
 
 const ogLocale = locale === 'pl' ? 'pl_PL' : 'en_GB';
 const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+
+// Hidden (non-active) locales are kept out of search results entirely.
+const indexable = isActiveLocale(locale);
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
+{!indexable && <meta name="robots" content="noindex, follow" />}
 <link rel="canonical" href={canonical} />
 
-{/* hreflang alternates */}
+{/* hreflang alternates — only advertise publicly active locales */}
 {
-  Object.entries(alternates).map(([loc, path]) => (
-    <link rel="alternate" hreflang={loc} href={new URL(path, site).href} />
-  ))
+  Object.entries(alternates)
+    .filter(([loc]) => isActiveLocale(loc as Locale))
+    .map(([loc, path]) => (
+      <link rel="alternate" hreflang={loc} href={new URL(path, site).href} />
+    ))
 }
 <link rel="alternate" hreflang="x-default" href={new URL(alternates.pl, site).href} />
 

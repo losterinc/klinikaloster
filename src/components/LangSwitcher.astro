@@ -1,5 +1,5 @@
 ---
-import { LOCALES, type Locale, useTranslations } from '@/lib/i18n';
+import { ACTIVE_LOCALES, type Locale, useTranslations } from '@/lib/i18n';
 
 interface Props {
   locale: Locale;
@@ -8,15 +8,21 @@ interface Props {
 }
 
 const { locale, alternates } = Astro.props;
-const other = LOCALES.find((l) => l !== locale)!;
+// Only offer to switch to another *active* (publicly visible) locale. With a
+// single active locale the switcher renders nothing.
+const other = ACTIVE_LOCALES.find((l) => l !== locale && alternates[l]);
 const t = useTranslations(locale);
 ---
 
-<a
-  href={alternates[other]}
-  hreflang={other}
-  class="text-sm font-medium text-brand-700 hover:text-brand-900"
-  aria-label={`${t('lang.switch')}`}
->
-  {t('lang.switch')}
-</a>
+{
+  other && (
+    <a
+      href={alternates[other]}
+      hreflang={other}
+      class="text-sm font-medium text-brand-700 hover:text-brand-900"
+      aria-label={t('lang.switch')}
+    >
+      {t('lang.switch')}
+    </a>
+  )
+}

@@ -2,8 +2,22 @@ export const LOCALES = ['pl', 'en'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'pl';
 
+/**
+ * Locales currently exposed on the public site. English remains a fully
+ * functional option — its content, routes, CMS fields and translations all
+ * still exist — but it is hidden for now: no language switcher, no `hreflang`
+ * advertising, and its pages are `noindex`. Re-enable English across the whole
+ * site by adding `'en'` back to this list (no other change required).
+ */
+export const ACTIVE_LOCALES: readonly Locale[] = ['pl'];
+
 export function isLocale(value: string): value is Locale {
   return (LOCALES as readonly string[]).includes(value);
+}
+
+/** Whether a locale is currently shown on the public site. */
+export function isActiveLocale(locale: Locale): boolean {
+  return ACTIVE_LOCALES.includes(locale);
 }
 
 /** UI string dictionary (chrome/navigation labels not stored in the CMS). */
