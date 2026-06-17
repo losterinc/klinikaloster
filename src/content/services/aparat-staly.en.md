@@ -4,7 +4,7 @@ description: Classic fixed appliance providing effective malocclusion treatment.
 price: from 3500 PLN / arch
 category: Treatment
 order: 2
-draft: false
+homepage: false
 ---
 
 Metal fixed braces are a proven and effective method of correcting malocclusions.

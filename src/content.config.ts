@@ -134,7 +134,7 @@ const services = defineCollection({
     price: z.string().optional(), // free-form to allow "od 1500 zł" / ranges
     category: z.string().optional(),
     order: z.number().default(0),
-    draft: z.boolean().default(false),
+    homepage: z.boolean().default(false),
   }),
 });
 

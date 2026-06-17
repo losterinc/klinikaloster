@@ -120,7 +120,7 @@ collections:
       - { name: price, label: Cena, widget: string, required: false, i18n: true }
       - { name: category, label: Kategoria, widget: string, required: false, i18n: true }
       - { name: order, label: Kolejność, widget: number, default: 0, value_type: int, i18n: duplicate }
-      - { name: draft, label: Szkic, widget: boolean, default: false, i18n: duplicate }
+      - { name: homepage, label: Widoczne na stronie glownej, widget: boolean, default: false, i18n: duplicate }
       - { name: body, label: Szczegóły, widget: markdown, required: false, i18n: true }
 
   # --- Wskazania do leczenia ---

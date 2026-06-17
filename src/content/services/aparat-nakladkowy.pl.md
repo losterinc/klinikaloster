@@ -4,7 +4,7 @@ description: Niemal niewidoczne, zdejmowane nakładki korygujące ustawienie zę
 price: wycena indywidualna
 category: Leczenie
 order: 3
-draft: false
+homepage: false
 ---
 
 Przezroczyste nakładki to dyskretna i wygodna alternatywa dla aparatu stałego.

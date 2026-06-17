@@ -4,7 +4,7 @@ description: Nearly invisible, removable aligners that correct tooth positioning
 price: individual quote
 category: Treatment
 order: 3
-draft: false
+homepage: false
 ---
 
 Clear aligners are a discreet and comfortable alternative to fixed braces. The

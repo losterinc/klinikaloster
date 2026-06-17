@@ -4,7 +4,7 @@ description: Pierwsza wizyta z badaniem, oceną zgryzu i propozycją planu lecze
 price: od 150 zł
 category: Diagnostyka
 order: 1
-draft: false
+homepage: true
 ---
 
 Podczas konsultacji lekarz przeprowadza badanie, ocenia stan zgryzu oraz omawia
