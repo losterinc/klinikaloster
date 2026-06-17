@@ -1,0 +1,73 @@
+---
+import { type Locale, useTranslations, localePath } from '@/lib/i18n';
+import LangSwitcher from './LangSwitcher.astro';
+
+interface Props {
+  locale: Locale;
+  clinicName: string;
+  alternates: Record<Locale, string>;
+}
+
+const { locale, clinicName, alternates } = Astro.props;
+const t = useTranslations(locale);
+
+const nav = [
+  { href: localePath(locale, 'team'), label: t('nav.team') },
+  { href: localePath(locale, 'services'), label: t('nav.services') },
+  { href: localePath(locale, 'indications'), label: t('nav.indications') },
+  { href: localePath(locale, 'contact'), label: t('nav.contact') },
+];
+
+const current = Astro.url.pathname;
+const isActive = (href: string) => current === href || current === href.replace(/\/$/, '');
+---
+
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
+  <div class="container-content flex h-16 items-center justify-between gap-4">
+    <a href={localePath(locale, 'home')} class="font-serif text-lg font-bold text-brand-800">
+      {clinicName}
+    </a>
+
+    <nav aria-label="Główna nawigacja" class="hidden items-center gap-6 md:flex">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'text-sm font-medium transition-colors hover:text-brand-700',
+              isActive(item.href) ? 'text-brand-700' : 'text-slate-600',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <LangSwitcher locale={locale} alternates={alternates} />
+    </nav>
+
+    <!-- Mobile: native disclosure, no JS required -->
+    <details class="relative md:hidden">
+      <summary
+        class="flex cursor-pointer items-center rounded-md p-2 text-slate-700 marker:content-none [&::-webkit-details-marker]:hidden"
+        aria-label="Menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </summary>
+      <div class="absolute right-0 mt-2 w-56 rounded-lg border border-slate-200 bg-white p-2 shadow-lg">
+        {
+          nav.map((item) => (
+            <a href={item.href} class="block rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-brand-50">
+              {item.label}
+            </a>
+          ))
+        }
+        <div class="mt-1 border-t border-slate-100 px-3 py-2">
+          <LangSwitcher locale={locale} alternates={alternates} />
+        </div>
+      </div>
+    </details>
+  </div>
+</header>

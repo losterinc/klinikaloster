@@ -1,0 +1,47 @@
+---
+import { render } from 'astro:content';
+import { type Locale, localePath, LOCALES } from '@/lib/i18n';
+import { getLocalizedEntry, getLocalized } from '@/lib/content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+const page = await getLocalizedEntry('pages', 'indications', locale);
+if (!page) throw new Error(`Missing pages/indications.${locale}.md`);
+
+const items = await getLocalized('indications', locale);
+const rendered = await Promise.all(items.map(async (i) => ({ i, ...(await render(i)) })));
+
+const alternates = Object.fromEntries(
+  LOCALES.map((l) => [l, localePath(l, 'indications')]),
+) as Record<Locale, string>;
+---
+
+<BaseLayout
+  locale={locale}
+  title={page.data.seo?.title ?? page.data.title}
+  description={page.data.seo?.description ?? ''}
+  alternates={alternates}
+>
+  <div class="container-content py-16">
+    <h1 class="text-3xl font-bold sm:text-4xl">{page.data.heroTitle}</h1>
+    {page.data.heroSubtitle && <p class="mt-4 max-w-2xl text-lg text-slate-600">{page.data.heroSubtitle}</p>}
+
+    <div class="mt-12 space-y-10">
+      {
+        rendered.map(({ i, Content }) => (
+          <article class="rounded-2xl border border-slate-200 p-6">
+            <h2 class="text-xl font-semibold">{i.data.title}</h2>
+            {i.data.summary && <p class="mt-1 text-slate-600">{i.data.summary}</p>}
+            <div class="prose-clinic mt-4">
+              <Content />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

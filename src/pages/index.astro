@@ -1,0 +1,18 @@
+---
+// Root: redirect to the default locale (PL). Static-friendly meta refresh.
+const target = '/pl/';
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <meta name="robots" content="noindex" />
+    <title>ORTODONCJA profesora Lostera</title>
+  </head>
+  <body>
+    <p>Przekierowanie… <a href={target}>Przejdź do strony</a>.</p>
+  </body>
+</html>

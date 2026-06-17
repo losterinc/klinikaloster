@@ -1,0 +1,70 @@
+---
+import { render } from 'astro:content';
+import { type Locale, localePath, LOCALES } from '@/lib/i18n';
+import { getLocalizedEntry, getLocalized } from '@/lib/content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+const page = await getLocalizedEntry('pages', 'team', locale);
+if (!page) throw new Error(`Missing pages/team.${locale}.md`);
+
+const members = await getLocalized('team', locale);
+const rendered = await Promise.all(members.map(async (m) => ({ m, ...(await render(m)) })));
+
+const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'team')])) as Record<
+  Locale,
+  string
+>;
+---
+
+<BaseLayout
+  locale={locale}
+  title={page.data.seo?.title ?? page.data.title}
+  description={page.data.seo?.description ?? ''}
+  alternates={alternates}
+>
+  <div class="container-content py-16">
+    <h1 class="text-3xl font-bold sm:text-4xl">{page.data.heroTitle}</h1>
+    {page.data.heroSubtitle && <p class="mt-4 max-w-2xl text-lg text-slate-600">{page.data.heroSubtitle}</p>}
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-2">
+      {
+        rendered.map(({ m, Content }) => (
+          <article class="rounded-2xl border border-slate-200 p-6">
+            <div class="flex items-start gap-5">
+              {m.data.photo && (
+                <img
+                  src={m.data.photo}
+                  alt={m.data.name}
+                  width={112}
+                  height={112}
+                  loading="lazy"
+                  decoding="async"
+                  class="h-28 w-28 flex-none rounded-full object-cover"
+                />
+              )}
+              <div>
+                <h2 class="text-xl font-semibold">{m.data.name}</h2>
+                <p class="text-brand-700">{m.data.title}</p>
+                {m.data.specialties.length > 0 && (
+                  <ul class="mt-2 flex flex-wrap gap-2">
+                    {m.data.specialties.map((s) => (
+                      <li class="rounded-full bg-brand-50 px-3 py-1 text-xs text-brand-700">{s}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+            <div class="prose-clinic mt-5">
+              <Content />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,95 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* ---------------------------------------------------------------------------
+   Design tokens (Tailwind CSS v4, CSS-first config)
+   Calm, professional medical palette for an orthodontics clinic.
+   --------------------------------------------------------------------------- */
+@theme {
+  /* Brand palette (primary: brand-500) */
+  --color-brand-50: #eef6fb;
+  --color-brand-100: #d6e9f4;
+  --color-brand-200: #aed3e9;
+  --color-brand-300: #7eb6d8;
+  --color-brand-400: #4f96c4;
+  --color-brand-500: #2f7aab;
+  --color-brand-600: #246190;
+  --color-brand-700: #1f4f74;
+  --color-brand-800: #1d4360;
+  --color-brand-900: #1c3850;
+  --color-brand-950: #122435;
+
+  /* Accent / secondary palette (accent-500) */
+  --color-accent-50: #f3faf7;
+  --color-accent-100: #d6f0e6;
+  --color-accent-200: #aee0cd;
+  --color-accent-300: #79c9ad;
+  --color-accent-400: #46ab8b;
+  --color-accent-500: #2b9072;
+  --color-accent-600: #1f735c;
+  --color-accent-700: #1c5c4b;
+  --color-accent-800: #1a493d;
+  --color-accent-900: #173c33;
+
+  /* Body text colour */
+  --color-ink: #1a2330;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+
+  /* Layout — drives the `max-w-content` utility */
+  --container-content: 72rem;
+}
+
+@layer base {
+  :root {
+    --color-brand: var(--color-brand-500);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-ink font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif text-brand-900;
+    text-wrap: balance;
+  }
+
+  /* Visible keyboard focus for accessibility (WCAG 2.1 AA). */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2;
+  }
+}
+
+/* `btn` is a utility (not a plain component class) so it can be composed with
+   `@apply` inside the button variants below. */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors;
+}
+
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-500 text-white hover:bg-brand-600;
+  }
+
+  .btn-outline {
+    @apply btn border border-brand-500 text-brand-700 hover:bg-brand-50;
+  }
+
+  .prose-clinic {
+    @apply prose prose-slate max-w-none prose-headings:font-serif prose-a:text-brand-600;
+  }
+}

@@ -1,0 +1,71 @@
+---
+import { type Locale, useTranslations, localePath, LOCALES } from '@/lib/i18n';
+import { getLocalizedEntry, getLocalized } from '@/lib/content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const page = await getLocalizedEntry('pages', 'services', locale);
+if (!page) throw new Error(`Missing pages/services.${locale}.md`);
+
+const services = await getLocalized('services', locale);
+
+// group by category, preserving order
+const groups = new Map<string, typeof services>();
+for (const s of services) {
+  const key = s.data.category ?? '';
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(s);
+}
+
+const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'services')])) as Record<
+  Locale,
+  string
+>;
+---
+
+<BaseLayout
+  locale={locale}
+  title={page.data.seo?.title ?? page.data.title}
+  description={page.data.seo?.description ?? ''}
+  alternates={alternates}
+>
+  <div class="container-content py-16">
+    <h1 class="text-3xl font-bold sm:text-4xl">{page.data.heroTitle}</h1>
+    {page.data.heroSubtitle && <p class="mt-4 max-w-2xl text-lg text-slate-600">{page.data.heroSubtitle}</p>}
+
+    {
+      [...groups.entries()].map(([category, items]) => (
+        <section class="mt-12">
+          {category && <h2 class="text-xl font-semibold text-brand-800">{category}</h2>}
+          <ul class="mt-5 divide-y divide-slate-200 rounded-xl border border-slate-200">
+            {items.map((s) => (
+              <li class="flex flex-col gap-2 p-5 sm:flex-row sm:items-baseline sm:justify-between">
+                <div class="sm:pr-8">
+                  <h3 class="font-semibold">{s.data.name}</h3>
+                  <p class="mt-1 text-sm text-slate-600">{s.data.description}</p>
+                </div>
+                {s.data.price && (
+                  <p class="flex-none whitespace-nowrap text-sm font-semibold text-accent-600">
+                    <span class="sr-only">{t('services.price')}: </span>
+                    {s.data.price}
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+
+    <p class="mt-10 text-sm text-slate-500">
+      <a href={localePath(locale, 'contact')} class="text-brand-600 hover:text-brand-800">
+        {t('nav.contact')} →
+      </a>
+    </p>
+  </div>
+</BaseLayout>

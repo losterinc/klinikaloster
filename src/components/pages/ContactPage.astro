@@ -1,0 +1,85 @@
+---
+import { type Locale, useTranslations, localePath, LOCALES } from '@/lib/i18n';
+import { getLocalizedEntry, getSettings } from '@/lib/content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const page = await getLocalizedEntry('pages', 'contact', locale);
+if (!page) throw new Error(`Missing pages/contact.${locale}.md`);
+
+const settings = await getSettings(locale);
+const telHref = `tel:${settings.phone.replace(/\s+/g, '')}`;
+const smsHref = settings.sms ? `sms:${settings.sms.replace(/\s+/g, '')}` : undefined;
+
+const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'contact')])) as Record<
+  Locale,
+  string
+>;
+---
+
+<BaseLayout
+  locale={locale}
+  title={page.data.seo?.title ?? page.data.title}
+  description={page.data.seo?.description ?? ''}
+  alternates={alternates}
+>
+  <div class="container-content py-16">
+    <h1 class="text-3xl font-bold sm:text-4xl">{page.data.heroTitle}</h1>
+    {page.data.heroSubtitle && <p class="mt-4 max-w-2xl text-lg text-slate-600">{page.data.heroSubtitle}</p>}
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-2">
+      <div class="space-y-8">
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">{t('contact.address')}</h2>
+          <address class="mt-2 not-italic text-lg text-slate-800">
+            {settings.address.street}<br />
+            {settings.address.postalCode} {settings.address.city}
+          </address>
+        </div>
+
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">{t('contact.phone')}</h2>
+          <ul class="mt-2 space-y-1 text-lg">
+            <li><a class="text-brand-700 hover:text-brand-900" href={telHref}>tel. {settings.phone}</a></li>
+            {smsHref && <li><a class="text-brand-700 hover:text-brand-900" href={smsHref}>sms {settings.sms}</a></li>}
+            <li><a class="text-brand-700 hover:text-brand-900" href={`mailto:${settings.email}`}>{settings.email}</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">{t('contact.hours')}</h2>
+          <ul class="mt-2 space-y-1 text-slate-700">
+            {settings.openingHours.map((h) => (
+              <li><span class="font-medium">{h.days}</span>: {h.hours}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href={telHref} class="btn-primary">{t('cta.call')}</a>
+          {smsHref && <a href={smsHref} class="btn-outline">{t('cta.sms')}</a>}
+          <a href={`mailto:${settings.email}`} class="btn-outline">{t('cta.email')}</a>
+        </div>
+      </div>
+
+      {
+        settings.mapEmbedUrl && (
+          <div class="overflow-hidden rounded-2xl border border-slate-200">
+            <iframe
+              src={settings.mapEmbedUrl}
+              title={`${settings.clinicName} — ${settings.address.city}`}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="h-80 w-full lg:h-full"
+            />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>

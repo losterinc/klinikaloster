@@ -1,0 +1,23 @@
+{
+  "name": "ortodoncja-loster-website",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static bilingual website for ORTODONCJA profesora Lostera (Kraków)",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.2",
+    "@astrojs/sitemap": "^3.7.3",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.1",
+    "astro": "^6.4.7",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^5.7.2"
+  }
+}

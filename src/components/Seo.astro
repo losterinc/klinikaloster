@@ -1,0 +1,55 @@
+---
+import type { Locale } from '@/lib/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  /** Map of locale -> absolute-or-relative path for hreflang alternates. */
+  alternates: Record<Locale, string>;
+  ogImage?: string;
+  /** Optional JSON-LD object(s) to inject. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, locale, alternates, ogImage, jsonLd } = Astro.props;
+
+const site = Astro.site ?? new URL('http://localhost:4321');
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImageUrl = ogImage ? new URL(ogImage, site).href : undefined;
+
+const ogLocale = locale === 'pl' ? 'pl_PL' : 'en_GB';
+const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{/* hreflang alternates */}
+{
+  Object.entries(alternates).map(([loc, path]) => (
+    <link rel="alternate" hreflang={loc} href={new URL(path, site).href} />
+  ))
+}
+<link rel="alternate" hreflang="x-default" href={new URL(alternates.pl, site).href} />
+
+{/* Open Graph */}
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={ogLocale} />
+{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+
+{/* Twitter */}
+<meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+
+{/* Structured data */}
+{
+  jsonLdArray.map((data) => (
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />
+  ))
+}
