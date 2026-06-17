@@ -84,8 +84,26 @@ export const routes: Record<Locale, Record<string, string>> = {
   },
 };
 
-/** Build an absolute (root-relative) path for a logical page in a locale. */
+/**
+ * Deployment base path, normalised to always have a single leading and
+ * trailing slash. It is `/` for localhost and the production domain
+ * (served at the root), and e.g. `/klinikaloster/` for a GitHub Pages
+ * project site. Astro exposes the configured `base` as `BASE_URL`.
+ */
+export const BASE_PATH: string = `/${(import.meta.env.BASE_URL || '/')
+  .replace(/^\/+|\/+$/g, '')}/`.replace(/\/{2,}/g, '/');
+
+/** Prefix a root-relative path with the deployment base path. */
+export function withBase(path: string): string {
+  return `${BASE_PATH}${path.replace(/^\/+/, '')}`;
+}
+
+/**
+ * Build a base-aware, root-relative path for a logical page in a locale.
+ * Includes the deployment base so links work when the site is served from
+ * a sub-path (e.g. GitHub Pages project sites).
+ */
 export function localePath(locale: Locale, page: keyof (typeof routes)['pl']): string {
   const seg = routes[locale][page];
-  return seg ? `/${locale}/${seg}/` : `/${locale}/`;
+  return withBase(seg ? `${locale}/${seg}/` : `${locale}/`);
 }

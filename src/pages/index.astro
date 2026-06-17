@@ -1,6 +1,9 @@
 ---
 // Root: redirect to the default locale (PL). Static-friendly meta refresh.
-const target = '/pl/';
+// Base-aware so it works at the site root (localhost / production domain)
+// and under a sub-path (e.g. GitHub Pages project sites).
+import { localePath } from '@/lib/i18n';
+const target = localePath('pl', 'home');
 ---
 
 <!doctype html>

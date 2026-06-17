@@ -79,3 +79,17 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+          
+#  deploy_ftp:
+#    # -------------------------------------------------------------
+#    # STEP A: DEPLOY TO DEDICATED SERVER (FTP/SFTP)
+#    # -------------------------------------------------------------
+#    - name: 🚀 Deploy to Dedicated Server via FTP
+#      needs: build
+#      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+#      with:
+#        server: ${{ secrets.FTP_SERVER }}
+#        username: ${{ secrets.FTP_USERNAME }}
+#        password: ${{ secrets.FTP_PASSWORD }}
+#        local-dir: ${{ env.BUILD_PATH }}/dist # Uploads ONLY the static output folder
+#        server-dir: /public_html/ # Target folder on your remote server
