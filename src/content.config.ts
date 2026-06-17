@@ -158,6 +158,8 @@ const pages = defineCollection({
     title: z.string(),
     heroTitle: z.string().optional(),
     heroSubtitle: z.string().optional(),
+    heroImage: z.string().optional(), // public path, e.g. /uploads/hero.jpg — shown behind the hero
+    heroSecondaryImage: z.string().optional(), // public path — shown in the hero, right-aligned under the text
     seo: z
       .object({
         title: z.string().optional(),

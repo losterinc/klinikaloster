@@ -1,5 +1,4 @@
 ---
-import { render } from 'astro:content';
 import { type Locale, useTranslations, localePath, LOCALES } from '@/lib/i18n';
 import { getLocalizedEntry, getLocalized, getSettings } from '@/lib/content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -12,7 +11,6 @@ const t = useTranslations(locale);
 
 const page = await getLocalizedEntry('pages', 'home', locale);
 if (!page) throw new Error(`Missing pages/home.${locale}.md`);
-const { Content } = await render(page);
 
 const services = (await getLocalized('services', locale))
     .filter(s => s.data.homepage)
@@ -35,21 +33,75 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
   alternates={alternates}
 >
   {/* Hero */}
-  <section class="bg-gradient-to-b from-brand-50 to-white">
+  <section class="relative isolate overflow-hidden bg-gradient-to-b from-brand-500 to-emerald-600">
+    {page.data.heroImage && (
+        <img
+            src={page.data.heroImage}
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            decoding="async"
+            data-hero-parallax
+            class="pointer-events-none absolute -top-[10%] left-0 -z-10 h-[120%] w-full object-cover opacity-20 mix-blend-multiply will-change-transform"
+        />
+    )}
     <div class="container-content grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:py-24">
       <div>
-        <h1 class="text-3xl font-bold sm:text-4xl lg:text-5xl">{page.data.heroTitle}</h1>
-        <p class="mt-5 text-lg text-slate-600">{page.data.heroSubtitle}</p>
+        <h1 class="text-3xl font-bold sm:text-4xl lg:text-5xl text-accent-50">{page.data.heroTitle}</h1>
+        <p class="mt-5 text-lg text-accent-100">{page.data.heroSubtitle}</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={telHref} class="btn-primary">{t('cta.call')}: {settings.phone}</a>
           <a href={localePath(locale, 'services')} class="btn-outline">{t('nav.services')}</a>
         </div>
       </div>
-      <div class="prose-clinic rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-100">
-        <Content />
-      </div>
+      {page.data.heroSecondaryImage && (
+          <div class="hidden items-end justify-end self-end lg:-mb-24 lg:flex">
+            <img
+                src={page.data.heroSecondaryImage}
+                alt=""
+                loading="eager"
+                decoding="async"
+                class="w-full max-w-md rounded-t-2xl object-cover"
+            />
+          </div>
+      )}
     </div>
   </section>
+
+  {/* Indications preview */}
+  { indications.length > 0 && (
+      <section class="bg-brand-50">
+        <div class="container-content py-16">
+          <h2 class="text-2xl font-bold">{t('nav.indications')}</h2>
+          <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {
+              indications.map((i) => (
+                  <li class="rounded-xl border border-slate-200 bg-white p-6">
+                    {i.data.image && (
+                        <img
+                            src={i.data.image}
+                            alt=""
+                            width={48}
+                            height={48}
+                            loading="lazy"
+                            decoding="async"
+                            class="mb-4 h-12 w-12 object-contain"
+                        />
+                    )}
+                    <h3 class="text-lg font-semibold">{i.data.title}</h3>
+                    {i.data.summary && (
+                        <p class="mt-2 text-sm text-slate-600">{i.data.summary}</p>
+                    )}
+                  </li>
+              ))
+            }
+          </ul>
+          <div class="mt-8">
+            <a href={localePath(locale, 'indications')} class="btn-outline">{t('nav.full_indications')} →</a>
+          </div>
+        </div>
+      </section>
+  )}
 
   {/* Services preview */}
   { services.length > 0 && (
@@ -73,39 +125,35 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
         </div>
       </section>
   )}
-
-  {/* Indications preview */}
-  { indications.length > 0 && (
-      <section class="bg-brand-50">
-        <div class="container-content py-16">
-          <h2 class="text-2xl font-bold">{t('nav.indications')}</h2>
-          <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {
-              indications.map((i) => (
-                  <li class="rounded-xl border border-slate-200 bg-white p-6">
-                    {i.data.image && (
-                        <img
-                          src={i.data.image}
-                          alt=""
-                          width={48}
-                          height={48}
-                          loading="lazy"
-                          decoding="async"
-                          class="mb-4 h-12 w-12 object-contain"
-                        />
-                    )}
-                    <h3 class="text-lg font-semibold">{i.data.title}</h3>
-                    {i.data.summary && (
-                        <p class="mt-2 text-sm text-slate-600">{i.data.summary}</p>
-                    )}
-                  </li>
-              ))
-            }
-          </ul>
-          <div class="mt-8">
-            <a href={localePath(locale, 'indications')} class="btn-outline">{t('nav.full_indications')} →</a>
-          </div>
-        </div>
-      </section>
-  )}
 </BaseLayout>
+
+<script>
+  // Small vertical parallax on the hero background image.
+  // Respects prefers-reduced-motion and uses rAF to stay off the scroll thread.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const img = document.querySelector<HTMLImageElement>('[data-hero-parallax]');
+  const section = img?.closest('section');
+
+  if (img && section && !reduceMotion.matches) {
+    const FACTOR = 0.2; // px moved per px scrolled (kept subtle)
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const rect = section.getBoundingClientRect();
+      // Only animate while the hero is in (or near) the viewport.
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const offset = Math.max(0, -rect.top) * FACTOR;
+      img.style.transform = `translate3d(0, ${offset}px, 0)`;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+  }
+</script>
