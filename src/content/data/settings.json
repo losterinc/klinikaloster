@@ -1,0 +1,32 @@
+{
+  "pl": {
+    "clinicName": "ORTODONCJA profesora Lostera",
+    "tagline": "Specjalistyczna klinika ortodontyczna w Krakowie",
+    "address": {
+      "street": "ul. Bartłomieja Nowodworskiego 4",
+      "postalCode": "30-433",
+      "city": "Kraków",
+      "country": "Polska"
+    },
+    "phone": "12 421 18 91",
+    "sms": "723 427 752",
+    "email": "ortodoncja.prof@loster.pl",
+    "mapEmbedUrl": "https://www.google.com/maps?q=ul.%20Bart%C5%82omieja%20Nowodworskiego%204%2C%2030-433%20Krak%C3%B3w&output=embed",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=ul.%20Bart%C5%82omieja%20Nowodworskiego%204%2C%2030-433%20Krak%C3%B3w",
+    "geo": {
+      "lat": 50.0526,
+      "lng": 19.9216
+    },
+    "openingHours": [
+      {
+        "days": "Poniedziałek–Piątek",
+        "hours": "9:00–18:00"
+      },
+      {
+        "days": "Sobota–Niedziela",
+        "hours": "Nieczynne"
+      }
+    ],
+    "social": null
+  }
+}

@@ -1,5 +1,5 @@
 import { getCollection, getEntry, type CollectionKey } from 'astro:content';
-import type { Locale } from './i18n';
+import { DEFAULT_LOCALE, type Locale } from './i18n';
 
 /**
  * Locale is encoded as the filename suffix (`<slug>.<locale>.md|json`), so the
@@ -43,9 +43,13 @@ export async function getLocalizedEntry<C extends CollectionKey>(
 
 /** Clinic settings singleton for a locale. */
 export async function getSettings(locale: Locale) {
-  const entry = await getEntry('settings', `settings.${locale}`);
+  const entry = await getEntry('settings', 'settings');
   if (!entry) {
-    throw new Error(`Missing settings for locale "${locale}" (src/content/data/settings.${locale}.json)`);
+    throw new Error('Missing settings entry (expected src/content/data/settings.json)');
   }
-  return entry.data;
+  const data = (entry.data as Record<Locale, unknown>)[locale] ?? (entry.data as Record<Locale, unknown>)[DEFAULT_LOCALE];
+  if (!data) {
+    throw new Error(`Missing settings for locale "${locale}" (expected a "${locale}" or "${DEFAULT_LOCALE}" key in src/content/data/settings.json)`);
+  }
+  return data as (typeof entry.data)[Locale];
 }

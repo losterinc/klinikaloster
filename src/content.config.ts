@@ -1,6 +1,9 @@
 import { defineCollection} from 'astro:content';
 import { z } from 'astro/zod';
-import { glob } from 'astro/loaders';
+import { glob, type LoaderContext } from 'astro/loaders';
+import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { DEFAULT_LOCALE } from './lib/i18n';
 
 /**
  * Content collections for ORTODONCJA profesora Lostera.
@@ -24,34 +27,89 @@ const openingHours = z.array(
   }),
 );
 
-// settings — clinic-wide singleton (one entry per locale)
-const settings = defineCollection({
-  loader: glob({ pattern: '*.{pl,en}.json', base: './src/content/data', generateId: keepLocaleId }),
-  schema: z.object({
-    clinicName: z.string(),
-    tagline: z.string().optional(),
-    address: z.object({
-      street: z.string(),
-      postalCode: z.string(),
-      city: z.string(),
-      country: z.string().default('Polska'),
-    }),
-    phone: z.string(),
-    sms: z.string().optional(),
-    email: z.email(),
-    mapEmbedUrl: z.url().optional(),
-    mapLink: z.url().optional(),
-    geo: z
-      .object({ lat: z.number(), lng: z.number() })
-      .optional(),
-    openingHours: openingHours.default([]),
-    social: z
-      .object({
-        facebook: z.url().optional(),
-        instagram: z.url().optional(),
-      })
-      .optional(),
+// settings — clinic-wide singleton.
+//
+// Sveltia/Decap store i18n *file* collections as ONE locale-keyed JSON file
+// (`{ "pl": {...}, "en": {...} }`). So the CMS source of truth is a single
+// `src/content/data/settings.json`, loaded here as ONE entry (`settings`) that
+// holds every locale. `getSettings(locale)` in `src/lib/content.ts` picks the
+// right locale object (falling back to the default locale when one is absent).
+const SETTINGS_FILE = 'src/content/data/settings.json';
+
+// Sveltia writes `null` for empty optional fields (objects/strings). Astro's Zod
+// `.optional()` treats `null` as a present-but-wrong value, so drop null keys —
+// a CMS `null` means "not set", identical to an omitted field.
+function stripNull(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(stripNull);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value)
+        .filter(([, v]) => v !== null)
+        .map(([k, v]) => [k, stripNull(v)]),
+    );
+  }
+  return value;
+}
+
+const settingsLoader = {
+  name: 'clinic-settings-json',
+  async load({ store, parseData, config, watcher, logger }: LoaderContext) {
+    const filePath = fileURLToPath(new URL(SETTINGS_FILE, config.root));
+
+    const sync = async () => {
+      let raw: unknown;
+      try {
+        raw = JSON.parse(await readFile(filePath, 'utf-8'));
+      } catch (err) {
+        logger.error(`Could not read ${SETTINGS_FILE}: ${(err as Error).message}`);
+        return;
+      }
+      store.clear();
+      const id = 'settings';
+      store.set({ id, data: await parseData({ id, data: stripNull(raw) as Record<string, unknown> }) });
+    };
+
+    await sync();
+    watcher?.on('change', (changed: string) => {
+      if (changed === filePath) void sync();
+    });
+  },
+};
+
+// One locale's settings object.
+const localeSettings = z.object({
+  clinicName: z.string(),
+  tagline: z.string().optional(),
+  address: z.object({
+    street: z.string(),
+    postalCode: z.string(),
+    city: z.string(),
+    country: z.string().default('Polska'),
   }),
+  phone: z.string(),
+  sms: z.string().optional(),
+  email: z.email(),
+  mapEmbedUrl: z.url().optional(),
+  mapLink: z.url().optional(),
+  geo: z
+    .object({ lat: z.number(), lng: z.number() })
+    .optional(),
+  openingHours: openingHours.default([]),
+  social: z
+    .object({
+      facebook: z.url().optional(),
+      instagram: z.url().optional(),
+    })
+    .optional(),
+});
+
+const settings = defineCollection({
+  loader: settingsLoader,
+  // The single entry is the locale-keyed object; the default locale is required,
+  // others are optional and fall back to it.
+  schema: z
+    .object({ [DEFAULT_LOCALE]: localeSettings })
+    .catchall(localeSettings.optional()),
 });
 
 // team — doctors / staff

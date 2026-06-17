@@ -1,7 +1,8 @@
 ---
 title: Treatment for adults
 summary: Orthodontics has no age limit — treatment is possible at any age.
-order: 3
+image: /uploads/xort_1.png.pagespeed.ic.vRUrPPasoO.webp
+order: 1
 draft: false
 ---
 

@@ -1,10 +1,11 @@
 ---
-title: Leczenie dorosłych
+title: Powiększony nagryz poziomy
 summary: Ortodoncja nie zna granicy wieku — leczyć można w każdym wieku.
-order: 3
+image: /uploads/xort_1.png.pagespeed.ic.vRUrPPasoO.webp
+order: 1
 draft: false
 ---
 
-Coraz więcej dorosłych decyduje się na leczenie ortodontyczne, korzystając
-z dyskretnych aparatów nakładkowych lub estetycznych aparatów stałych. Leczenie
-można rozpocząć praktycznie w każdym wieku, o ile zęby i dziąsła są zdrowe.
+Powiększony nagryz poziomy w którym górne zęby sieczne
+nie są chronione przez wargę.
+Nieleczony stanowi zwiększone zagrożenie urazu zębów siecznych.
