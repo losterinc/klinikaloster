@@ -10,7 +10,7 @@
 
 backend:
   name: github
-  repo: OWNER/REPO # TODO: set to "github-user/repo-name"
+  repo: losterinc/klinikaloster
   branch: main
   # TODO: set to your deployed sveltia-cms-auth Worker URL:
   # base_url: https://auth.example.workers.dev
