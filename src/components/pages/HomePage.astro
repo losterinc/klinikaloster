@@ -1,5 +1,5 @@
 ---
-import { type Locale, useTranslations, localePath, LOCALES } from '@/lib/i18n';
+import { type Locale, useTranslations, localePath, withBase, LOCALES } from '@/lib/i18n';
 import { getLocalizedEntry, getLocalized, getSettings } from '@/lib/content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
@@ -36,7 +36,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
   <section class="relative isolate overflow-hidden bg-gradient-to-b from-brand-500 to-emerald-600">
     {page.data.heroImage && (
         <img
-            src={page.data.heroImage}
+            src={withBase(page.data.heroImage)}
             alt=""
             aria-hidden="true"
             loading="eager"
@@ -57,7 +57,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
       {page.data.heroSecondaryImage && (
           <div class="hidden items-end justify-end self-end lg:-mb-24 lg:flex">
             <img
-                src={page.data.heroSecondaryImage}
+                src={withBase(page.data.heroSecondaryImage)}
                 alt=""
                 loading="eager"
                 decoding="async"
@@ -79,7 +79,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
                   <li class="rounded-xl border border-slate-200 bg-white p-6">
                     {i.data.image && (
                         <img
-                            src={i.data.image}
+                            src={withBase(i.data.image)}
                             alt=""
                             width={48}
                             height={48}

@@ -1,5 +1,5 @@
 ---
-import { type Locale, isActiveLocale } from '@/lib/i18n';
+import { type Locale, isActiveLocale, withBase } from '@/lib/i18n';
 
 interface Props {
   title: string;
@@ -16,7 +16,7 @@ const { title, description, locale, alternates, ogImage, jsonLd } = Astro.props;
 
 const site = Astro.site ?? new URL('http://localhost:4321');
 const canonical = new URL(Astro.url.pathname, site).href;
-const ogImageUrl = ogImage ? new URL(ogImage, site).href : undefined;
+const ogImageUrl = ogImage ? new URL(withBase(ogImage), site).href : undefined;
 
 const ogLocale = locale === 'pl' ? 'pl_PL' : 'en_GB';
 const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];

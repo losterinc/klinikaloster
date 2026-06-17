@@ -1,6 +1,6 @@
 ---
 import { render } from 'astro:content';
-import { type Locale, localePath, LOCALES } from '@/lib/i18n';
+import { type Locale, localePath, withBase, LOCALES } from '@/lib/i18n';
 import { getLocalizedEntry, getLocalized } from '@/lib/content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
@@ -37,7 +37,7 @@ const alternates = Object.fromEntries(
             <div class="flex items-start gap-4">
               {i.data.image && (
                 <img
-                  src={i.data.image}
+                  src={withBase(i.data.image)}
                   alt=""
                   width={56}
                   height={56}
