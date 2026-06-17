@@ -146,6 +146,7 @@ const indications = defineCollection({
     summary: z.string().optional(),
     image: z.string().optional(), // public path, e.g. /uploads/wady-zgryzu.jpg
     order: z.number().default(0),
+    homepage: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });

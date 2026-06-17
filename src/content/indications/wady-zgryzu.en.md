@@ -2,6 +2,7 @@
 title: Malocclusions
 summary: Misaligned teeth or jaws that require orthodontic correction.
 order: 1
+homepage: true
 draft: false
 ---
 

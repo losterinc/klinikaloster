@@ -2,6 +2,7 @@
 title: Crowded teeth
 summary: Insufficient space in the dental arch causing teeth to overlap.
 order: 2
+homepage: true
 draft: false
 ---
 

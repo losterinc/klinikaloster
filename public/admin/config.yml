@@ -138,6 +138,7 @@ collections:
       - { name: summary, label: Podsumowanie, widget: text, required: false, i18n: true }
       - { name: image, label: Obraz, widget: image, required: false, i18n: duplicate }
       - { name: order, label: Kolejność, widget: number, default: 0, value_type: int, i18n: duplicate }
+      - { name: homepage, label: Widoczne na stronie glownej, widget: boolean, default: false, i18n: duplicate }
       - { name: draft, label: Szkic, widget: boolean, default: false, i18n: duplicate }
       - { name: body, label: Treść, widget: markdown, i18n: true, required: [pl] }
 

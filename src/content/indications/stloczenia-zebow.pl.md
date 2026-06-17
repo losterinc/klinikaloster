@@ -2,6 +2,7 @@
 title: Stłoczenia zębów
 summary: Brak miejsca w łuku zębowym powodujący nachodzenie zębów na siebie.
 order: 2
+homepage: true
 draft: false
 ---
 
