@@ -2,6 +2,7 @@
 import { type Locale, useTranslations, localePath, withBase, LOCALES } from '@/lib/i18n';
 import { getLocalizedEntry, getLocalized } from '@/lib/content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import {getCollection} from "astro:content";
 
 interface Props {
   locale: Locale;

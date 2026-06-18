@@ -113,9 +113,11 @@ const settings = defineCollection({
     .catchall(localeSettings.optional()),
 });
 
-// team — doctors / staff
+// team — doctors / staff.
+// Team entries are locale-independent: one `<slug>.md` per person, no locale
+// suffix (the same staff list is shown on every locale's /zespol page).
 const team = defineCollection({
-  loader: glob({ pattern: '**/*.{pl,en}.md', base: './src/content/team', generateId: keepLocaleId }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/team', generateId: keepLocaleId }),
   schema: z.object({
     name: z.string(),
     title: z.string(),

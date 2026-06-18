@@ -48,26 +48,24 @@ const alternates = Object.fromEntries(
     <div class="space-y-10">
       {
         rendered.map(({ i, Content }) => (
-          <article class="rounded-2xl border border-slate-200 p-6">
-            <div class="flex items-start gap-4">
+          <article class="overflow-hidden rounded-2xl border border-slate-200">
+            <div class="grid gap-6 md:grid-cols-[40%_1fr] md:gap-8">
               {i.data.image && (
                 <img
                   src={withBase(i.data.image)}
                   alt=""
-                  width={56}
-                  height={56}
                   loading="lazy"
                   decoding="async"
-                  class="h-14 w-14 flex-none object-contain"
+                  class="aspect-[4/3] h-full w-full object-cover md:aspect-auto"
                 />
               )}
-              <div>
+              <div class="p-6 md:py-8 md:pr-8 md:pl-0">
                 <h2 class="text-xl font-semibold">{i.data.title}</h2>
                 {i.data.summary && <p class="mt-1 text-slate-600">{i.data.summary}</p>}
+                <div class="prose-clinic mt-4">
+                  <Content />
+                </div>
               </div>
-            </div>
-            <div class="prose-clinic mt-4">
-              <Content />
             </div>
           </article>
         ))
