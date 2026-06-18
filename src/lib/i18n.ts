@@ -41,6 +41,8 @@ const ui = {
     'footer.rights': 'Wszelkie prawa zastrzeżone',
     'skip.content': 'Przejdź do treści',
     'lang.switch': 'English',
+    'carousel.prev': 'Poprzednie',
+    'carousel.next': 'Następne',
   },
   en: {
     'nav.home': 'Home',
@@ -61,6 +63,8 @@ const ui = {
     'footer.rights': 'All rights reserved',
     'skip.content': 'Skip to content',
     'lang.switch': 'Polski',
+    'carousel.prev': 'Previous',
+    'carousel.next': 'Next',
   },
 } as const;
 

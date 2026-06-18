@@ -35,8 +35,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
   description={page.data.seo?.description ?? ''}
   alternates={alternates}
 >
-  {/* Hero — pulled up under the sticky h-16 header; content padding compensates */}
-  <section class="relative isolate -mt-16 overflow-hidden bg-gradient-to-b from-brand-500 to-emerald-600">
+  <section class="relative isolate -mt-16 overflow-hidden bg-gradient-to-b from-accent-300 to-brand-400">
     {page.data.heroImage && (
         <img
             src={withBase(page.data.heroImage)}
@@ -54,7 +53,6 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
         <p class="mt-5 text-lg text-accent-100">{page.data.heroSubtitle}</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={telHref} class="btn-primary">{t('cta.call')}: {settings.phone}</a>
-          <a href={localePath(locale, 'services')} class="btn-outline">{t('nav.services')}</a>
         </div>
       </div>
       {page.data.heroSecondaryImage && (
@@ -93,10 +91,25 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
       <section class="bg-brand-50">
         <div class="container-content py-16">
           <h2 class="text-2xl font-bold">{t('nav.indications')}</h2>
-          <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          {/* Carousel — buttons flank the track left/right, hidden until JS detects overflow */}
+          <div class="relative mt-8">
+            <button
+                type="button"
+                data-indications-prev
+                aria-label={t('carousel.prev')}
+                hidden
+                class="absolute left-0 top-1/2 z-10 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-brand-300 bg-white text-brand-700 shadow-md transition hover:bg-brand-100 disabled:cursor-not-allowed disabled:opacity-0 max-sm:left-2 max-sm:-translate-x-0"
+            >
+              <span aria-hidden="true">←</span>
+            </button>
+            <ul
+                data-indications-track
+                class="flex snap-x snap-mandatory gap-6 overflow-hidden scroll-smooth py-8 -my-8"
+            >
             {
               indications.map((i) => (
-                  <li class="group relative flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-xl bg-brand-700 shadow-sm transition duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+                  <li class="group relative flex min-h-[22rem] w-full shrink-0 snap-start flex-col justify-end overflow-hidden rounded-xl bg-brand-700 shadow-sm transition duration-500 ease-out hover:-translate-y-2 hover:shadow-2xs sm:w-[20rem]">
                     {i.data.image && (
                         <img
                             src={withBase(i.data.image)}
@@ -125,7 +138,18 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
                   </li>
               ))
             }
-          </ul>
+            </ul>
+            <button
+                type="button"
+                data-indications-next
+                aria-label={t('carousel.next')}
+                hidden
+                class="absolute right-0 top-1/2 z-10 flex h-11 w-11 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-brand-300 bg-white text-brand-700 shadow-md transition hover:bg-brand-100 disabled:cursor-not-allowed disabled:opacity-0 max-sm:right-2 max-sm:translate-x-0"
+            >
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
           <div class="mt-8">
             <a href={localePath(locale, 'indications')} class="btn-outline">{t('nav.full_indications')} →</a>
           </div>
@@ -193,5 +217,42 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
 
     window.addEventListener('scroll', onScroll, { passive: true });
     update();
+  }
+</script>
+
+<script>
+  // Indications carousel — horizontal scroll with prev/next buttons that flank the track.
+  // Buttons step one card at a time and stay hidden unless the track overflows.
+  const track = document.querySelector<HTMLUListElement>('[data-indications-track]');
+  const prevBtn = document.querySelector<HTMLButtonElement>('[data-indications-prev]');
+  const nextBtn = document.querySelector<HTMLButtonElement>('[data-indications-next]');
+
+  if (track && prevBtn && nextBtn) {
+    // One card width + the flex gap, so each click advances by exactly one card.
+    const step = () => {
+      const card = track.querySelector<HTMLElement>(':scope > li');
+      if (!card) return track.clientWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return card.offsetWidth + gap;
+    };
+
+    const updateState = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      const hasOverflow = max > 1;
+      // Hide a button when it can't move any further (and when nothing overflows).
+      prevBtn.hidden = !hasOverflow || track.scrollLeft <= 1;
+      nextBtn.hidden = !hasOverflow || track.scrollLeft >= max - 1;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: step(), behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', updateState, { passive: true });
+    window.addEventListener('resize', updateState);
+    updateState();
   }
 </script>
