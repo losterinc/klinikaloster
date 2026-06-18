@@ -44,17 +44,16 @@ collections:
         file: src/content/data/settings.json
         i18n: true
         fields:
-          - { name: clinicName, label: Nazwa kliniki, widget: string, i18n: true, required: [pl] }
-          - { name: tagline, label: Hasło, widget: string, required: false, i18n: true }
+          - { name: clinicName, label: Nazwa kliniki, widget: string }
+          - { name: tagline, label: Hasło, widget: string, required: false }
           - name: address
             label: Adres
             widget: object
-            i18n: true
             fields:
-              - { name: street, label: Ulica, widget: string, i18n: true, required: [pl] }
+              - { name: street, label: Ulica, widget: string }
               - { name: postalCode, label: Kod pocztowy, widget: string, i18n: duplicate }
-              - { name: city, label: Miasto, widget: string, i18n: true, required: [pl] }
-              - { name: country, label: Kraj, widget: string, i18n: true, default: Polska, required: [pl] }
+              - { name: city, label: Miasto, widget: string }
+              - { name: country, label: Kraj, widget: string, default: Polska }
           - { name: phone, label: Telefon, widget: string, i18n: duplicate }
           - { name: sms, label: SMS, widget: string, required: false, i18n: duplicate }
           - { name: email, label: E-mail, widget: string, i18n: duplicate }
@@ -71,10 +70,8 @@ collections:
           - name: openingHours
             label: Godziny otwarcia
             widget: list
-            i18n: true
-            required: [pl]
             fields:
-              - { name: days, label: Dni, widget: string, i18n: true, required: [pl] }
+              - { name: days, label: Dni, widget: string }
               - { name: hours, label: Godziny, widget: string, i18n: duplicate }
           - name: social
             label: Media społecznościowe
@@ -91,18 +88,19 @@ collections:
     label_singular: Osoba
     folder: src/content/team
     create: true
-    i18n: true
     slug: '{{slug}}'
     summary: '{{name}}'
-    sortable_fields: [order, name]
+    sortable_fields: [name]
+    reorder: true
     fields:
-      - { name: name, label: Imię i nazwisko, widget: string, i18n: true, required: [pl] }
-      - { name: title, label: Tytuł / stanowisko, widget: string, i18n: true, required: [pl] }
+      - { name: name, label: Imię i nazwisko, widget: string }
+      - { name: title, label: Tytuł / stanowisko, widget: string }
       - { name: specialties, label: Specjalizacje, widget: list, field: { name: item, label: Specjalizacja, widget: string }, i18n: true, required: [pl] }
       - { name: photo, label: Zdjęcie, widget: image, required: false, i18n: duplicate }
-      - { name: order, label: Kolejność, widget: number, default: 0, value_type: int, i18n: duplicate }
+      # Kolejność ustawiana przez przeciąganie na liście wpisów (reorder); ukryta w edytorze.
+      - { name: order, label: Kolejność, widget: hidden, default: 0, i18n: duplicate }
       - { name: draft, label: Szkic, widget: boolean, default: false, i18n: duplicate }
-      - { name: body, label: Biogram, widget: markdown, i18n: true, required: [pl] }
+      - { name: body, label: Biogram, widget: markdown }
 
   # --- Oferta / cennik ---
   - name: services
@@ -110,18 +108,19 @@ collections:
     label_singular: Usługa
     folder: src/content/services
     create: true
-    i18n: true
+    i18n: false
     slug: '{{slug}}'
     summary: '{{name}}'
-    sortable_fields: [order, name]
+    sortable_fields: [name]
+    reorder: true
     fields:
-      - { name: name, label: Nazwa usługi, widget: string, i18n: true, required: [pl] }
-      - { name: description, label: Opis, widget: text, i18n: true, required: [pl] }
-      - { name: price, label: Cena, widget: string, required: false, i18n: true }
-      - { name: category, label: Kategoria, widget: string, required: false, i18n: true }
-      - { name: order, label: Kolejność, widget: number, default: 0, value_type: int, i18n: duplicate }
+      - { name: name, label: Nazwa usługi, widget: string }
+      - { name: description, label: Opis, widget: text }
+      - { name: price, label: Cena, widget: string, required: false }
+      - { name: category, label: Kategoria, widget: string, required: false }
+      - { name: order, label: Kolejność, widget: hidden, default: 0, i18n: duplicate }
       - { name: homepage, label: Widoczne na stronie glownej, widget: boolean, default: false, i18n: duplicate }
-      - { name: body, label: Szczegóły, widget: markdown, required: false, i18n: true }
+      - { name: body, label: Szczegóły, widget: markdown, required: false }
 
   # --- Wskazania do leczenia ---
   - name: indications
@@ -129,18 +128,19 @@ collections:
     label_singular: Wskazanie
     folder: src/content/indications
     create: true
-    i18n: true
+    i18n: false
     slug: '{{slug}}'
     summary: '{{title}}'
-    sortable_fields: [order, title]
+    sortable_fields: [title]
+    reorder: true
     fields:
-      - { name: title, label: Tytuł, widget: string, i18n: true, required: [pl] }
-      - { name: summary, label: Podsumowanie, widget: text, required: false, i18n: true }
+      - { name: title, label: Tytuł, widget: string}
+      - { name: summary, label: Podsumowanie, widget: text, required: false }
       - { name: image, label: Obraz, widget: image, required: false, i18n: duplicate }
-      - { name: order, label: Kolejność, widget: number, default: 0, value_type: int, i18n: duplicate }
+      - { name: order, label: Kolejność, widget: hidden, default: 0, i18n: duplicate }
       - { name: homepage, label: Widoczne na stronie glownej, widget: boolean, default: false, i18n: duplicate }
       - { name: draft, label: Szkic, widget: boolean, default: false, i18n: duplicate }
-      - { name: body, label: Treść, widget: markdown, i18n: true, required: [pl] }
+      - { name: body, label: Treść, widget: markdown, }
 
   # --- Strony (treść + SEO) ---
   - name: pages
@@ -148,13 +148,12 @@ collections:
     label_singular: Strona
     folder: src/content/pages
     create: true
-    i18n: true
     slug: '{{slug}}'
     summary: '{{title}}'
     fields:
-      - { name: title, label: Tytuł strony, widget: string, i18n: true, required: [pl] }
-      - { name: heroTitle, label: Nagłówek (hero), widget: string, required: false, i18n: true }
-      - { name: heroSubtitle, label: Podtytuł (hero), widget: text, required: false, i18n: true }
+      - { name: title, label: Tytuł strony, widget: string}
+      - { name: heroTitle, label: Nagłówek (hero), widget: string, required: false}
+      - { name: heroSubtitle, label: Podtytuł (hero), widget: text, required: false }
       - { name: heroImage, label: Tło sekcji hero, widget: image, required: false, i18n: duplicate }
       - { name: heroSecondaryImage, label: Zdjęcie w sekcji hero (po prawej), widget: image, required: false, i18n: duplicate }
       - name: seo
@@ -163,7 +162,7 @@ collections:
         required: false
         i18n: true
         fields:
-          - { name: title, label: Tytuł SEO, widget: string, required: false, i18n: true }
-          - { name: description, label: Opis SEO, widget: text, required: false, i18n: true }
+          - { name: title, label: Tytuł SEO, widget: string, required: false }
+          - { name: description, label: Opis SEO, widget: text, required: false }
           - { name: ogImage, label: Obraz OG, widget: image, required: false, i18n: duplicate }
-      - { name: body, label: Treść, widget: markdown, required: false, i18n: true }
+      - { name: body, label: Treść, widget: markdown, required: false }

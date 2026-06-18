@@ -1,10 +1,10 @@
 ---
-name: Aparat nakładkowy (clear aligners)
+order: 3
+name: Aparat nakładkowy
 description: Niemal niewidoczne, zdejmowane nakładki korygujące ustawienie zębów.
 price: wycena indywidualna
 category: Leczenie
-order: 3
-homepage: false
+homepage: true
 ---
 
 Przezroczyste nakładki to dyskretna i wygodna alternatywa dla aparatu stałego.
