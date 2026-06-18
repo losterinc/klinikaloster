@@ -22,7 +22,7 @@ const current = Astro.url.pathname;
 const isActive = (href: string) => current === href || current === href.replace(/\/$/, '');
 ---
 
-<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/70 backdrop-blur">
   <div class="container-content flex h-16 items-center justify-between gap-4">
     <a href={localePath(locale, 'home')} class="font-serif text-lg font-bold text-brand-800">
       {clinicName}

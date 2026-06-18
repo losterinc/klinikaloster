@@ -32,8 +32,8 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
   description={page.data.seo?.description ?? ''}
   alternates={alternates}
 >
-  {/* Hero */}
-  <section class="relative isolate overflow-hidden bg-gradient-to-b from-brand-500 to-emerald-600">
+  {/* Hero — pulled up under the sticky h-16 header; content padding compensates */}
+  <section class="relative isolate -mt-16 overflow-hidden bg-gradient-to-b from-brand-500 to-emerald-600">
     {page.data.heroImage && (
         <img
             src={withBase(page.data.heroImage)}
@@ -45,7 +45,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
             class="pointer-events-none absolute -top-[10%] left-0 -z-10 h-[120%] w-full object-cover opacity-20 mix-blend-multiply will-change-transform"
         />
     )}
-    <div class="container-content grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:py-24">
+    <div class="container-content grid gap-8 pb-16 pt-32 lg:grid-cols-2 lg:items-center lg:pb-24 lg:pt-40">
       <div>
         <h1 class="text-3xl font-bold sm:text-4xl lg:text-5xl text-accent-50">{page.data.heroTitle}</h1>
         <p class="mt-5 text-lg text-accent-100">{page.data.heroSubtitle}</p>
