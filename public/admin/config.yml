@@ -46,6 +46,7 @@ collections:
         fields:
           - { name: clinicName, label: Nazwa kliniki, widget: string }
           - { name: tagline, label: Hasło, widget: string, required: false }
+          - { name: logo, label: Logo, widget: image, required: false, i18n: duplicate }
           - name: address
             label: Adres
             widget: object

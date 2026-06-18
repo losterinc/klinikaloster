@@ -1,20 +1,22 @@
 ---
 import { type Locale, useTranslations, localePath } from '@/lib/i18n';
 import LangSwitcher from './LangSwitcher.astro';
+import {withBase} from "../lib/i18n";
 
 interface Props {
   locale: Locale;
   clinicName: string;
+  clinicLogoImage?: string;
   alternates: Record<Locale, string>;
 }
 
-const { locale, clinicName, alternates } = Astro.props;
+const { locale, clinicName, clinicLogoImage, alternates } = Astro.props;
 const t = useTranslations(locale);
 
 const nav = [
-  { href: localePath(locale, 'team'), label: t('nav.team') },
   { href: localePath(locale, 'services'), label: t('nav.services') },
   { href: localePath(locale, 'indications'), label: t('nav.indications') },
+  { href: localePath(locale, 'team'), label: t('nav.team') },
   { href: localePath(locale, 'contact'), label: t('nav.contact') },
 ];
 
@@ -22,10 +24,21 @@ const current = Astro.url.pathname;
 const isActive = (href: string) => current === href || current === href.replace(/\/$/, '');
 ---
 
-<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/70 backdrop-blur">
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/70 backdrop-blur-sm">
   <div class="container-content flex h-16 items-center justify-between gap-4">
-    <a href={localePath(locale, 'home')} class="font-serif text-lg font-bold text-brand-800">
-      {clinicName}
+    <a href={localePath(locale, 'home')} class="flex items-center gap-3 font-serif text-lg font-bold text-brand-800">
+      {clinicLogoImage && (
+          <img
+              src={withBase(clinicLogoImage)}
+              alt="Logo Kliniki"
+              width={42}
+              height={42}
+              loading="lazy"
+              decoding="async"
+              class="h-12 w-12 flex-none object-contain"
+          />
+      )}
+      <span class="whitespace-nowrap">{clinicName}</span>
     </a>
 
     <nav aria-label="Główna nawigacja" class="hidden items-center gap-6 md:flex">
@@ -35,8 +48,8 @@ const isActive = (href: string) => current === href || current === href.replace(
             href={item.href}
             aria-current={isActive(item.href) ? 'page' : undefined}
             class:list={[
-              'text-sm font-medium transition-colors hover:text-brand-700',
-              isActive(item.href) ? 'text-brand-700' : 'text-slate-600',
+              'rounded-full px-8 py-2 text-center text-sm font-medium transition-colors hover:text-brand-700 bg-white/50 backdrop-blur-sm',
+              isActive(item.href) ? '' : 'border border-brand-100',
             ]}
           >
             {item.label}

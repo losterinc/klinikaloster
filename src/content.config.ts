@@ -80,6 +80,7 @@ const settingsLoader = {
 const localeSettings = z.object({
   clinicName: z.string(),
   tagline: z.string().optional(),
+  logo: z.string().optional(),
   address: z.object({
     street: z.string(),
     postalCode: z.string(),
