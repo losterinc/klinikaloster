@@ -1,7 +1,7 @@
 ---
 import { render } from 'astro:content';
 import { type Locale, localePath, withBase, LOCALES } from '@/lib/i18n';
-import { getLocalizedEntry, getLocalized } from '@/lib/content';
+import { getLocalizedEntry, getAll } from '@/lib/content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 interface Props {
@@ -12,7 +12,7 @@ const { locale } = Astro.props;
 const page = await getLocalizedEntry('pages', 'indications', locale);
 if (!page) throw new Error(`Missing pages/indications.${locale}.md`);
 
-const items = await getLocalized('indications', locale);
+const items = await getAll('indications');
 const rendered = await Promise.all(items.map(async (i) => ({ i, ...(await render(i)) })));
 
 const alternates = Object.fromEntries(

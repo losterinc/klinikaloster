@@ -33,6 +33,24 @@ export async function getLocalized<C extends CollectionKey>(collection: C, local
 }
 
 /**
+ * All non-draft entries of a locale-independent collection (one `<slug>.md` per
+ * item, no locale suffix), sorted by `order`. Use for collections shown
+ * identically on every locale (e.g. `team`, `services`, `indications`).
+ */
+export async function getAll<C extends CollectionKey>(collection: C) {
+  const entries = await getCollection(
+    collection,
+    ({ data }) => (data as { draft?: boolean }).draft !== true,
+  );
+
+  return entries.sort((a, b) => {
+    const oa = (a.data as { order?: number }).order ?? 0;
+    const ob = (b.data as { order?: number }).order ?? 0;
+    return oa - ob;
+  });
+}
+
+/**
  * A single entry by logical slug + locale. Falls back to the default-locale
  * entry when the requested locale has no file yet, so hidden/secondary locales
  * (e.g. the currently noindex `/en/` routes) still build instead of throwing on

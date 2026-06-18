@@ -1,6 +1,6 @@
 ---
 import { type Locale, useTranslations, localePath, withBase, LOCALES } from '@/lib/i18n';
-import { getLocalizedEntry, getLocalized, getSettings } from '@/lib/content';
+import { getLocalizedEntry, getAll, getSettings } from '@/lib/content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 interface Props {
@@ -12,10 +12,10 @@ const t = useTranslations(locale);
 const page = await getLocalizedEntry('pages', 'home', locale);
 if (!page) throw new Error(`Missing pages/home.${locale}.md`);
 
-const services = (await getLocalized('services', locale))
+const services = (await getAll('services'))
     .filter(s => s.data.homepage)
     .slice(0, 3);
-const indications = (await getLocalized('indications', locale))
+const indications = (await getAll('indications'))
     .filter(i => i.data.homepage);
 const settings = await getSettings(locale);
 const telHref = `tel:${settings.phone.replace(/\s+/g, '')}`;

@@ -1,8 +1,7 @@
 ---
 import { type Locale, useTranslations, localePath, withBase, LOCALES } from '@/lib/i18n';
-import { getLocalizedEntry, getLocalized } from '@/lib/content';
+import { getLocalizedEntry, getAll } from '@/lib/content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import {getCollection} from "astro:content";
 
 interface Props {
   locale: Locale;
@@ -13,7 +12,7 @@ const t = useTranslations(locale);
 const page = await getLocalizedEntry('pages', 'services', locale);
 if (!page) throw new Error(`Missing pages/services.${locale}.md`);
 
-const services = await getLocalized('services', locale);
+const services = await getAll('services');
 
 // group by category, preserving order
 const groups = new Map<string, typeof services>();

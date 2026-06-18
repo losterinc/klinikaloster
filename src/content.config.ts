@@ -129,8 +129,9 @@ const team = defineCollection({
 });
 
 // services — oferta + cennik
+// Locale-independent: one `<slug>.md` per service (same offer shown on every locale).
 const services = defineCollection({
-  loader: glob({ pattern: '**/*.{pl,en}.md', base: './src/content/services', generateId: keepLocaleId }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/services', generateId: keepLocaleId }),
   schema: z.object({
     name: z.string(),
     description: z.string(),
@@ -142,8 +143,9 @@ const services = defineCollection({
 });
 
 // indications — wskazania do leczenia ortodontycznego
+// Locale-independent: one `<slug>.md` per indication (same list shown on every locale).
 const indications = defineCollection({
-  loader: glob({ pattern: '**/*.{pl,en}.md', base: './src/content/indications', generateId: keepLocaleId }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/indications', generateId: keepLocaleId }),
   schema: z.object({
     title: z.string(),
     summary: z.string().optional(),
