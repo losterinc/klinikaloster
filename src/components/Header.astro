@@ -39,7 +39,7 @@ const isActive = (href: string) => current === href || current === href.replace(
               class="h-12 w-12 flex-none object-contain"
           />
       )}
-      <span class="whitespace-nowrap">{clinicName}</span>
+      <span class="min-w-0 truncate text-[clamp(0.85rem,4vw,1.125rem)]" data-clinic-name>{clinicName}</span>
     </a>
 
     <nav aria-label="Główna nawigacja" class="hidden shrink-0 items-center gap-6 md:flex" data-desktop-nav>
@@ -140,10 +140,31 @@ const isActive = (href: string) => current === href || current === href.replace(
     const navEl = nav;
     let scheduled = false;
 
+    // Shrink the clinic name to fit the space left beside the hamburger /
+    // nav, down to a floor; only then does `truncate` add the ellipsis.
+    function fitClinicName() {
+      const span = logoEl.querySelector<HTMLElement>('[data-clinic-name]');
+      if (!span) return;
+      const BASE = 1.125; // rem — matches text-lg
+      const MIN = 0.8;    // rem — smallest before we allow ellipsis
+      // Measure at full size: clientWidth is the space available (the flex
+      // item is shrunk + clipped to it), scrollWidth is the text's natural
+      // width. Their ratio is how much we must scale the font to fit.
+      span.style.fontSize = BASE + 'rem';
+      if (span.scrollWidth > span.clientWidth) {
+        const ratio = span.clientWidth / span.scrollWidth;
+        span.style.fontSize = Math.max(MIN, BASE * ratio).toFixed(3) + 'rem';
+      }
+    }
+
     function measure() {
       scheduled = false;
       // Reset so the media-query baseline applies while we measure.
       innerEl.classList.remove('nav-force-compact');
+
+      // The name fits independently of the nav (justify-between already
+      // reserves the hamburger's space), so do it on every layout.
+      fitClinicName();
 
       // Below md the desktop nav is display:none — the native mobile menu
       // already handles it, and we can't measure a hidden element.
