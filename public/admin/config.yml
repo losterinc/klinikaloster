@@ -90,7 +90,7 @@ collections:
     create: true
     slug: '{{slug}}'
     summary: '{{name}}'
-    sortable_fields: [name]
+    sortable_fields: [order]
     reorder: true
     fields:
       - { name: name, label: Imię i nazwisko, widget: string }
@@ -111,7 +111,7 @@ collections:
     i18n: false
     slug: '{{slug}}'
     summary: '{{name}}'
-    sortable_fields: [name]
+    sortable_fields: [order]
     reorder: true
     fields:
       - { name: name, label: Nazwa usługi, widget: string }
@@ -131,7 +131,7 @@ collections:
     i18n: false
     slug: '{{slug}}'
     summary: '{{title}}'
-    sortable_fields: [title]
+    sortable_fields: [order]
     reorder: true
     fields:
       - { name: title, label: Tytuł, widget: string}
@@ -156,6 +156,15 @@ collections:
       - { name: heroSubtitle, label: Podtytuł (hero), widget: text, required: false }
       - { name: heroImage, label: Tło sekcji hero, widget: image, required: false, i18n: duplicate }
       - { name: heroSecondaryImage, label: Zdjęcie w sekcji hero (po prawej), widget: image, required: false, i18n: duplicate }
+      - { name: bookingTitle, label: 'Nagłówek sekcji „Umów wizytę”', widget: string, required: false }
+      - name: bookingWidgets
+        label: 'Widżety „Umów wizytę” (ZnanyLekarz)'
+        label_singular: Widżet
+        widget: list
+        required: false
+        i18n: duplicate
+        fields:
+          - { name: doctor, label: 'Identyfikator profilu ZnanyLekarz', widget: string }
       - name: seo
         label: SEO
         widget: object

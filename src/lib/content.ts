@@ -32,13 +32,20 @@ export async function getLocalized<C extends CollectionKey>(collection: C, local
     });
 }
 
-/** A single entry by logical slug + locale. */
+/**
+ * A single entry by logical slug + locale. Falls back to the default-locale
+ * entry when the requested locale has no file yet, so hidden/secondary locales
+ * (e.g. the currently noindex `/en/` routes) still build instead of throwing on
+ * a missing translation. A real `<slug>.<locale>.md` always overrides this.
+ */
 export async function getLocalizedEntry<C extends CollectionKey>(
   collection: C,
   slug: string,
   locale: Locale,
 ) {
-  return getEntry(collection, `${slug}.${locale}`);
+  const entry = await getEntry(collection, `${slug}.${locale}`);
+  if (entry || locale === DEFAULT_LOCALE) return entry;
+  return getEntry(collection, `${slug}.${DEFAULT_LOCALE}`);
 }
 
 /** Clinic settings singleton for a locale. */

@@ -2,6 +2,7 @@
 order: 3
 title: Wady zgryzu
 summary: Nieprawidłowe ustawienie zębów lub szczęk wymagające korekty ortodontycznej.
+image: /uploads/Gemini_Generated_Image_rtd8oortd8oortd8.png
 homepage: true
 draft: false
 ---

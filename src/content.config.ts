@@ -160,6 +160,19 @@ const pages = defineCollection({
     heroSubtitle: z.string().optional(),
     heroImage: z.string().optional(), // public path, e.g. /uploads/hero.jpg — shown behind the hero
     heroSecondaryImage: z.string().optional(), // public path — shown in the hero, right-aligned under the text
+    // "Umów wizytę" — ZnanyLekarz booking widgets. List order = display order
+    // (configurable via the CMS list drag handles).
+    bookingTitle: z.string().optional(),
+    bookingWidgets: z
+      .array(
+        z.object({
+          label: z.string().optional(), // e.g. doctor / clinic name shown above the widget
+          doctor: z.string(), // ZnanyLekarz profile id (the `data-zlw-doctor` value)
+          url: z.string().optional(), // full profile URL; defaults to znanylekarz.pl/<doctor>
+          type: z.string().default('big_with_calendar'), // ZnanyLekarz widget type
+        }),
+      )
+      .default([]),
     seo: z
       .object({
         title: z.string().optional(),
