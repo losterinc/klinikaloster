@@ -155,8 +155,8 @@ collections:
       - { name: title, label: Tytuł strony, widget: string}
       - { name: heroTitle, label: Nagłówek (hero), widget: string, required: false}
       - { name: heroSubtitle, label: Podtytuł (hero), widget: text, required: false }
-      - { name: heroImage, label: Tło sekcji hero, widget: image, required: false, i18n: duplicate }
-      - { name: heroSecondaryImage, label: Zdjęcie w sekcji hero (po prawej), widget: image, required: false, i18n: duplicate }
+      - { name: heroImage, label: Tło nagłówka, widget: image, required: false, i18n: duplicate }
+      - { name: heroSecondaryImage, label: Zdjęcie w nagłówku (tylko strona glowna), widget: image, required: false, i18n: duplicate }
       - { name: bookingTitle, label: 'Nagłówek sekcji „Umów wizytę”', widget: string, required: false }
       - name: bookingWidgets
         label: 'Widżety „Umów wizytę” (ZnanyLekarz)'

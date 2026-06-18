@@ -27,11 +27,26 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'team
   description={page.data.seo?.description ?? ''}
   alternates={alternates}
 >
-  <div class="container-content py-16">
-    <h1 class="text-3xl font-bold sm:text-4xl">{page.data.heroTitle}</h1>
-    {page.data.heroSubtitle && <p class="mt-4 max-w-2xl text-lg text-slate-600">{page.data.heroSubtitle}</p>}
+  <section class="relative isolate -mt-16 overflow-hidden bg-gradient-to-b from-accent-300 to-brand-400">
+    {page.data.heroImage && (
+        <img
+            src={withBase(page.data.heroImage)}
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            decoding="async"
+            data-hero-parallax
+            class="pointer-events-none absolute -top-[10%] left-0 -z-10 h-[120%] w-full object-cover opacity-20 mix-blend-multiply will-change-transform"
+        />
+    )}
+    <div class="container-content pb-16 pt-32 lg:pb-24 lg:pt-40">
+      <h1 class="text-3xl font-bold sm:text-4xl lg:text-5xl text-accent-50">{page.data.heroTitle}</h1>
+      {page.data.heroSubtitle && <p class="mt-5 max-w-2xl text-lg text-accent-100">{page.data.heroSubtitle}</p>}
+    </div>
+  </section>
 
-    <div class="mt-12 grid gap-10 lg:grid-cols-2">
+  <div class="container-content py-16">
+    <div class="grid gap-10 lg:grid-cols-2">
       {
         rendered.map(({ m, Content }) => (
           <article class="rounded-2xl border border-slate-200 p-6">
@@ -68,3 +83,34 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'team
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  // Small vertical parallax on the hero background image.
+  // Respects prefers-reduced-motion and uses rAF to stay off the scroll thread.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const img = document.querySelector<HTMLImageElement>('[data-hero-parallax]');
+  const section = img?.closest('section');
+
+  if (img && section && !reduceMotion.matches) {
+    const FACTOR = 0.2; // px moved per px scrolled (kept subtle)
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const rect = section.getBoundingClientRect();
+      // Only animate while the hero is in (or near) the viewport.
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const offset = Math.max(0, -rect.top) * FACTOR;
+      img.style.transform = `translate3d(0, ${offset}px, 0)`;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+  }
+</script>
