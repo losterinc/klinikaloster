@@ -61,7 +61,11 @@ export async function getLocalizedEntry<C extends CollectionKey>(
   slug: string,
   locale: Locale,
 ) {
-  const entry = await getEntry(collection, `${slug}.${locale}`);
+  // Pages are single-language now (`<slug>.md`, id = slug), so try the plain
+  // slug first. Fall back to the locale-suffixed convention for any collection
+  // that still ships `<slug>.<locale>.md` (kept so EN can be re-enabled later).
+  const entry =
+    (await getEntry(collection, slug)) ?? (await getEntry(collection, `${slug}.${locale}`));
   if (entry || locale === DEFAULT_LOCALE) return entry;
   return getEntry(collection, `${slug}.${DEFAULT_LOCALE}`);
 }

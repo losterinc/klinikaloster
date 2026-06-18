@@ -9,7 +9,7 @@ interface Settings {
   mapLink?: string;
   geo?: { lat: number; lng: number };
   openingHours: { days: string; hours: string }[];
-  social?: { facebook?: string; instagram?: string };
+  social?: { facebook?: string; };
 }
 
 /**
@@ -17,7 +17,7 @@ interface Settings {
  * Uses the consistent NAP from the settings collection.
  */
 export function clinicJsonLd(settings: Settings, siteUrl: string, _locale: Locale) {
-  const sameAs = [settings.social?.facebook, settings.social?.instagram].filter(Boolean);
+  const sameAs = [settings.social?.facebook].filter(Boolean);
 
   return {
     '@context': 'https://schema.org',

@@ -81,7 +81,6 @@ collections:
             i18n: duplicate
             fields:
               - { name: facebook, label: Facebook, widget: string, required: false }
-              - { name: instagram, label: Instagram, widget: string, required: false }
 
   # --- Zespół ---
   - name: team

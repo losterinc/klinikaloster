@@ -99,7 +99,6 @@ const localeSettings = z.object({
   social: z
     .object({
       facebook: z.url().optional(),
-      instagram: z.url().optional(),
     })
     .optional(),
 });
@@ -157,8 +156,9 @@ const indications = defineCollection({
 });
 
 // pages — editable page copy + per-page SEO
+// Single-language for now: one `<slug>.md` per page (no locale suffix).
 const pages = defineCollection({
-  loader: glob({ pattern: '**/*.{pl,en}.md', base: './src/content/pages', generateId: keepLocaleId }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/pages', generateId: keepLocaleId }),
   schema: z.object({
     title: z.string(),
     heroTitle: z.string().optional(),

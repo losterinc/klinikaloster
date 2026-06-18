@@ -45,7 +45,7 @@ const fullTitle = title.includes(settings.clinicName) ? title : `${title} · ${s
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:shadow">
       {t('skip.content')}
     </a>
-    <Header locale={locale} clinicLogoImage={settings.logo} clinicName={settings.clinicName} alternates={alternates} />
+    <Header locale={locale} clinicLogoImage={settings.logo} clinicName={settings.clinicName} facebookUrl={settings.social?.facebook} alternates={alternates} />
     <main id="main" class="flex-1">
       <slot />
     </main>
