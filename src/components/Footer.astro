@@ -22,7 +22,7 @@ const telHref = `tel:${settings.phone.replace(/\s+/g, '')}`;
 const smsHref = settings.sms ? `sms:${settings.sms.replace(/\s+/g, '')}` : undefined;
 ---
 
-<footer class="mt-20 border-t border-slate-200 bg-slate-50">
+<footer class="mt-20 border-t border-slate-200 bg-gradient-to-b from-brand-100 to-accent-100">
   <div class="container-content grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-3">
     <div>
       <h2 class="text-base font-semibold text-brand-900">{settings.clinicName}</h2>
@@ -55,7 +55,7 @@ const smsHref = settings.sms ? `sms:${settings.sms.replace(/\s+/g, '')}` : undef
     </div>
   </div>
 
-  <div class="border-t border-slate-200">
+  <div class="border-t border-white">
     <div class="container-content flex flex-col gap-2 py-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} {settings.clinicName}. {t('footer.rights')}.</p>
       <a href={localePath(locale, 'home')} class="hover:text-brand-700">{t('nav.home')}</a>

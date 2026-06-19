@@ -52,7 +52,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'serv
     </div>
   </section>
 
-  <div class="container-content py-16">
+  <div class="container-content">
     {
       [...groups.entries()].map(([category, items]) => (
         <section class="mt-12">
@@ -76,12 +76,6 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'serv
         </section>
       ))
     }
-
-    <p class="mt-10 text-sm text-slate-500">
-      <a href={localePath(locale, 'contact')} class="text-brand-600 hover:text-brand-800">
-        {t('nav.contact')} →
-      </a>
-    </p>
   </div>
 </BaseLayout>
 

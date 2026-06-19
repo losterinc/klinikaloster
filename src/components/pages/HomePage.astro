@@ -231,7 +231,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
       setTimeout(() => {
         iframe.setAttribute('data-loaded', '');
         skeleton?.remove();
-      }, 1000);
+      }, 1500);
     };
 
     // `load` may have already fired before hydration; reveal anyway as a fallback.
