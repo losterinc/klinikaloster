@@ -73,7 +73,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
   { bookingWidgets.length > 0 && (
       <section id="umow-wizyte" class="bg-white">
         <div class="container-content py-16">
-          <h2 class="text-2xl font-bold">{bookingTitle}</h2>
+          <h2 class="text-3xl font-sans font-bold text-brand-800">{bookingTitle.toUpperCase()}</h2>
           <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {
               bookingWidgets.map((w, idx) => (
@@ -115,7 +115,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
   { indications.length > 0 && (
       <section class="bg-brand-50">
         <div class="container-content py-16">
-          <h2 class="text-2xl font-bold">{t('nav.indications')}</h2>
+          <h2 class="text-3xl font-sans font-bold text-brand-800">{t('nav.indications').toUpperCase()}</h2>
 
           {/* Carousel — buttons flank the track left/right, hidden until JS detects overflow */}
           <div class="relative mt-8">
@@ -185,7 +185,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
   {/* Services preview */}
   { services.length > 0 && (
       <section class="container-content pt-16">
-        <h2 class="text-2xl font-bold">{t('nav.services')}</h2>
+        <h2 class="text-3xl font-sans font-bold text-brand-800">{t('nav.services').toUpperCase()}</h2>
         <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {
             services.map((s) => (
