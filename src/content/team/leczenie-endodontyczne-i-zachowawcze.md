@@ -1,5 +1,5 @@
 ---
-order: 10
+order: 9
 name: Lek. dent. Natalia Gniecka
 title: Leczenie endodontyczne i zachowawcze
 specialties: []
