@@ -1,5 +1,5 @@
 ---
-order: 5
+order: 6
 title: Ujemny nagryz poziomy
 summary: ''
 image: /uploads/Gemini_Generated_Image_58bbg558bbg558bb.png

@@ -1,5 +1,5 @@
 ---
-order: 9
+order: 10
 title: Zgryz otwarty
 summary: ''
 image: ''

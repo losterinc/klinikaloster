@@ -1,5 +1,5 @@
 ---
-order: 7
+order: 8
 title: Brak bocznych zębów siecznych
 summary: ''
 image: ''
