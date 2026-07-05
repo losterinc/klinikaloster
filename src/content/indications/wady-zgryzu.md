@@ -1,12 +1,11 @@
 ---
 order: 2
 title: Wyraźne stłoczenie zębów
-summary: Nieprawidłowe ustawienie zębów lub szczęk wymagające korekty ortodontycznej.
+summary: ''
 image: /uploads/Gemini_Generated_Image_rtd8oortd8oortd8.png
 homepage: true
 draft: false
 ---
 
-Wady zgryzu, takie jak stłoczenia, zgryz głęboki, otwarty czy krzyżowy, mogą
-utrudniać gryzienie, żucie i mowę oraz wpływać na higienę jamy ustnej. Leczenie
-ortodontyczne pozwala przywrócić prawidłową funkcję i estetykę uzębienia.
+Wyraźne stłoczenie zębów, szczególnie zębów siecznych górnych lub w okolicy kłów.
+Nieleczone może utrudniać kontakt z rówieśnikami; może być powodem rozwoju kompleksów, a w rezultacie czynnikiem pogarszającym jakość życia.
