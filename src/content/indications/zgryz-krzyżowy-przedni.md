@@ -3,7 +3,7 @@ order: 6
 title: Zgryz krzyżowy przedni
 summary: ''
 image: ''
-homepage: false
+homepage: true
 draft: false
 ---
 
