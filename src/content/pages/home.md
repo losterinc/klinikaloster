@@ -1,7 +1,7 @@
 ---
 title: Strona główna
-heroTitle: ''
-heroSubtitle: ''
+heroTitle: KLINIczKA ORTODONCJI profesora Lostera
+heroSubtitle: Leczenie ortodontyczne dzieci, młodzieży i osób dorosłych
 heroImage: /uploads/139999362_1886607291492761_1730710509438445964_n.jpg
 heroSecondaryImage: /uploads/Gemini_Generated_Image_p6dtpmp6dtpmp6dt-removebg-preview.png
 bookingTitle: Umów wizytę
