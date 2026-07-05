@@ -1,7 +1,7 @@
 ---
 order: 3
-name: Zofia Juszka
-title: Stomatolog
+name: Lek. dent. Zofia Juszka
+title: Rezydet ortodoncji
 specialties: []
 photo: /uploads/Screenshot 2026-06-18 at 15.44.05.png
 draft: false
