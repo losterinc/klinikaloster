@@ -13,16 +13,17 @@ interface Settings {
 interface Props {
   locale: Locale;
   settings: Settings;
+  hasMargin?: boolean;
 }
 
-const { locale, settings } = Astro.props;
+const { locale, settings, hasMargin = true } = Astro.props;
 const t = useTranslations(locale);
 const year = new Date().getFullYear();
 const telHref = `tel:${settings.phone.replace(/\s+/g, '')}`;
 const smsHref = settings.sms ? `sms:${settings.sms.replace(/\s+/g, '')}` : undefined;
 ---
 
-<footer class="mt-20 border-t border-slate-200 bg-gradient-to-b from-brand-100 to-accent-100">
+<footer class:list={["border-t border-slate-200 bg-gradient-to-b from-brand-100 to-accent-100", hasMargin ? "mt-20" : "mt-0"]}>
   <div class="container-content grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-3">
     <div>
       <h2 class="text-base font-semibold text-brand-900">{settings.clinicName}</h2>

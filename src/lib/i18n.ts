@@ -25,7 +25,7 @@ const ui = {
   pl: {
     'nav.home': 'Strona główna',
     'nav.team': 'Zespół',
-    'nav.services': 'Oferta',
+    'nav.services': 'Realizowane Świadczenia',
     'nav.full_services': 'Pełna Oferta',
     'nav.indications': 'Wskazania',
     'nav.full_indications': 'Wszystkie wskazania',

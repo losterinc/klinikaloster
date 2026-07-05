@@ -14,9 +14,10 @@ interface Props {
   /** Equivalent page path in each locale, for hreflang + language switcher. */
   alternates: Record<Locale, string>;
   ogImage?: string;
+  footerMargin?: boolean;
 }
 
-const { locale, title, description, alternates, ogImage } = Astro.props;
+const { locale, title, description, alternates, ogImage, footerMargin = true } = Astro.props;
 const t = useTranslations(locale);
 const settings = await getSettings(locale);
 
@@ -49,6 +50,6 @@ const fullTitle = title.includes(settings.clinicName) ? title : `${title} · ${s
     <main id="main" class="flex-1">
       <slot />
     </main>
-    <Footer locale={locale} settings={settings} />
+    <Footer locale={locale} settings={settings} hasMargin={footerMargin} />
   </body>
 </html>

@@ -27,6 +27,12 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
   Locale,
   string
 >;
+
+const lastSectionHasBackground = bookingWidgets.length > 0
+  ? true
+  : services.length > 0
+    ? false
+    : true;
 ---
 
 <BaseLayout
@@ -34,6 +40,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
   title={page.data.seo?.title ?? page.data.title}
   description={page.data.seo?.description ?? ''}
   alternates={alternates}
+  footerMargin={!lastSectionHasBackground}
 >
   <section class="relative isolate -mt-16 overflow-hidden bg-gradient-to-b from-accent-300 to-brand-400">
     {page.data.heroImage && (
@@ -68,48 +75,6 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
       )}
     </div>
   </section>
-
-  {/* Umów wizytę — ZnanyLekarz booking widgets (order = CMS list order) */}
-  { bookingWidgets.length > 0 && (
-      <section id="umow-wizyte" class="bg-white">
-        <div class="container-content py-16">
-          <h2 class="text-3xl font-sans font-bold text-brand-800">{bookingTitle.toUpperCase()}</h2>
-          <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {
-              bookingWidgets.map((w, idx) => (
-                  <div class="relative h-[244px] w-full overflow-hidden rounded-lg" data-booking-widget>
-                    {/* Skeleton loader — shown until the iframe fires its load event */}
-                    <div
-                        aria-hidden="true"
-                        data-booking-skeleton
-                        class="absolute inset-0 animate-pulse rounded-lg border border-slate-200 bg-white p-4"
-                    >
-                      <div class="flex items-center gap-3">
-                        <div class="h-12 w-12 shrink-0 rounded-full bg-slate-200" />
-                        <div class="flex-1 space-y-2">
-                          <div class="h-3 w-2/3 rounded bg-slate-200" />
-                          <div class="h-2.5 w-1/2 rounded bg-slate-100" />
-                        </div>
-                      </div>
-                      <div class="mt-5 grid grid-cols-4 gap-2">
-                        {Array.from({ length: 4 }).map(() => (
-                            <div class="space-y-2">
-                              <div class="h-2.5 rounded bg-slate-100" />
-                              <div class="h-7 rounded bg-slate-200" />
-                              <div class="h-7 rounded bg-slate-100" />
-                            </div>
-                        ))}
-                      </div>
-                    </div>
-                    <iframe frameborder="0" scrolling="no" allowtransparency="true" data-id="qrpda9kpyz" title="Docplanner Booking Widget" src=`https://widgets.znanylekarz.pl/doctor/widget/big/${w.doctor}?customUtm=null&amp;id=qrpda9kpyz&amp;header=null&amp;content=null&amp;fullwidth=null&amp;referer=https%3A%2F%2Floster.pl%2F&amp;hide_branding=null&amp;widget_position=bottom&amp;opinion=false&amp;saasonly=false&amp;expand_calendar=false` style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; overflow: hidden; width: 100%; height: 244px;" class="relative h-full w-full opacity-0 transition-opacity duration-500 data-[loaded]:opacity-100"></iframe>
-                  </div>
-
-              ))
-            }
-          </div>
-        </div>
-      </section>
-  )}
 
   {/* Indications preview */}
   { indications.length > 0 && (
@@ -184,7 +149,7 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
 
   {/* Services preview */}
   { services.length > 0 && (
-      <section class="container-content pt-16">
+      <section class="container-content py-16">
         <h2 class="text-3xl font-sans font-bold text-brand-800">{t('nav.services').toUpperCase()}</h2>
         <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {
@@ -201,6 +166,48 @@ const alternates = Object.fromEntries(LOCALES.map((l) => [l, localePath(l, 'home
         </ul>
         <div class="mt-8">
           <a href={localePath(locale, 'services')} class="btn-outline">{t('nav.full_services')} →</a>
+        </div>
+      </section>
+  )}
+
+  {/* Umów wizytę — ZnanyLekarz booking widgets (order = CMS list order) */}
+  { bookingWidgets.length > 0 && (
+      <section id="umow-wizyte" class="bg-brand-50">
+        <div class="container-content py-16">
+          <h2 class="text-3xl font-sans font-bold text-brand-800">{bookingTitle.toUpperCase()}</h2>
+          <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {
+              bookingWidgets.map((w, idx) => (
+                  <div class="relative h-[244px] w-full overflow-hidden rounded-lg" data-booking-widget>
+                    {/* Skeleton loader — shown until the iframe fires its load event */}
+                    <div
+                        aria-hidden="true"
+                        data-booking-skeleton
+                        class="absolute inset-0 animate-pulse rounded-lg border border-slate-200 bg-white p-4"
+                    >
+                      <div class="flex items-center gap-3">
+                        <div class="h-12 w-12 shrink-0 rounded-full bg-slate-200" />
+                        <div class="flex-1 space-y-2">
+                          <div class="h-3 w-2/3 rounded bg-slate-200" />
+                          <div class="h-2.5 w-1/2 rounded bg-slate-100" />
+                        </div>
+                      </div>
+                      <div class="mt-5 grid grid-cols-4 gap-2">
+                        {Array.from({ length: 4 }).map(() => (
+                            <div class="space-y-2">
+                              <div class="h-2.5 rounded bg-slate-100" />
+                              <div class="h-7 rounded bg-slate-200" />
+                              <div class="h-7 rounded bg-slate-100" />
+                            </div>
+                        ))}
+                      </div>
+                    </div>
+                    <iframe frameborder="0" scrolling="no" allowtransparency="true" data-id="qrpda9kpyz" title="Docplanner Booking Widget" src=`https://widgets.znanylekarz.pl/doctor/widget/big/${w.doctor}?customUtm=null&amp;id=qrpda9kpyz&amp;header=null&amp;content=null&amp;fullwidth=null&amp;referer=https%3A%2F%2Floster.pl%2F&amp;hide_branding=null&amp;widget_position=bottom&amp;opinion=false&amp;saasonly=false&amp;expand_calendar=false` style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; overflow: hidden; width: 100%; height: 244px;" class="relative h-full w-full opacity-0 transition-opacity duration-500 data-[loaded]:opacity-100"></iframe>
+                  </div>
+
+              ))
+            }
+          </div>
         </div>
       </section>
   )}
