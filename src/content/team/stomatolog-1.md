@@ -1,6 +1,6 @@
 ---
 order: 4
-name: Kacper Loster
+name: Lek. dent. Kacper Loster
 title: Stomatolog
 specialties: []
 photo: ''
