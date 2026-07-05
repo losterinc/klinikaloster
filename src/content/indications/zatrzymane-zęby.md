@@ -3,7 +3,7 @@ order: 11
 title: Zatrzymane zęby
 summary: ''
 image: ''
-homepage: false
+homepage: true
 draft: false
 ---
 
