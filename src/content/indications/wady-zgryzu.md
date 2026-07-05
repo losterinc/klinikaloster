@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 2
 title: Wyraźne stłoczenie zębów
 summary: ''
 image: /uploads/Gemini_Generated_Image_rtd8oortd8oortd8.png
