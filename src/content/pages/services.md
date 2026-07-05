@@ -1,5 +1,5 @@
 ---
-title: Oferta
+title: Świadczenia
 heroTitle: Oferta i cennik
 heroSubtitle: Zakres usług ortodontycznych wraz z orientacyjnym cennikiem.
 heroImage: /uploads/139999362_1886607291492761_1730710509438445964_n.jpg
