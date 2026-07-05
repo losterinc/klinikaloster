@@ -7,4 +7,5 @@ homepage: false
 draft: false
 ---
 
-x
+Zgryz krzyżowy przedni ze zgryzem wymuszonym lub brakiem swobody w centrum okluzji.
+Nie leczony prowadzi do zaburzenia rozwoju szczęk i do urazu przyzębia.
