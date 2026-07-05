@@ -3,7 +3,7 @@ order: 9
 title: Zgryz otwarty
 summary: ''
 image: ''
-homepage: false
+homepage: true
 draft: false
 ---
 
