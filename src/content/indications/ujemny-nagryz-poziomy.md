@@ -1,7 +1,7 @@
 ---
 order: 5
 title: Ujemny nagryz poziomy
-summary: Ujemny nagryz poziomy ze zgryzem wymuszonym lub brakiem swobody
+summary: ''
 image: /uploads/Gemini_Generated_Image_58bbg558bbg558bb.png
 homepage: true
 draft: false
