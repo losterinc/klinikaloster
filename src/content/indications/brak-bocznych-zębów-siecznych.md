@@ -3,7 +3,7 @@ order: 7
 title: Brak bocznych zębów siecznych
 summary: ''
 image: ''
-homepage: false
+homepage: true
 draft: false
 ---
 
