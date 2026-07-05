@@ -3,7 +3,7 @@ order: 8
 title: Zgryz krzyżowy lub przewieszony
 summary: ''
 image: ''
-homepage: false
+homepage: true
 draft: false
 ---
 
