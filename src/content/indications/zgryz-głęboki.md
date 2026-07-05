@@ -3,7 +3,7 @@ order: 4
 title: Zgryz głęboki
 summary: ''
 image: ''
-homepage: false
+homepage: true
 draft: false
 ---
 
