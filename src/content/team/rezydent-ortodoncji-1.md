@@ -1,5 +1,5 @@
 ---
-order: 7
+order: 6
 name: Lek. dent. Kinga Gomółka
 title: Rezydent ortodoncji
 specialties: []

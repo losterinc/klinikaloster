@@ -1,5 +1,5 @@
 ---
-order: 6
+order: 5
 name: Lek. dent. Estera Piróg
 title: Rezydent ortodoncji
 specialties: []

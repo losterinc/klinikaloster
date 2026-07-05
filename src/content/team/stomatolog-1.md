@@ -1,5 +1,5 @@
 ---
-order: 5
+order: 7
 name: Lek. dent. Kacper Loster
 title: Stomatolog
 specialties: []
