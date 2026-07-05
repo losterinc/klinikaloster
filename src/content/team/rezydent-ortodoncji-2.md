@@ -1,5 +1,5 @@
 ---
-order: 8
+order: 7
 name: Lek. dent. Marek Pakaszewski
 title: Rezydent ortodoncji
 specialties: []
