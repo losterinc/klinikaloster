@@ -1,5 +1,5 @@
 ---
-order: 5
+order: 3
 name: Dr n. med. Piotr Koryczan
 title: chirurg szczękowo-twarzowy
 specialties: []

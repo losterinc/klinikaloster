@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 4
 name: Lek. dent. Zofia Juszka
 title: Rezydet ortodoncji
 specialties: []
