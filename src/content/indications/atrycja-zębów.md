@@ -3,7 +3,7 @@ order: 10
 title: Atrycja zębów
 summary: ''
 image: ''
-homepage: false
+homepage: true
 draft: false
 ---
 
