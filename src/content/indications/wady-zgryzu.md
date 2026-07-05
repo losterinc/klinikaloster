@@ -1,13 +1,11 @@
 ---
 order: 2
-title: Wady zgryzu
+title: Wyraźne stłoczenie zębów
 summary: Nieprawidłowe ustawienie zębów lub szczęk wymagające korekty ortodontycznej.
 image: /uploads/Gemini_Generated_Image_rtd8oortd8oortd8.png
 homepage: true
 draft: false
 ---
-
-
 
 Wady zgryzu, takie jak stłoczenia, zgryz głęboki, otwarty czy krzyżowy, mogą
 utrudniać gryzienie, żucie i mowę oraz wpływać na higienę jamy ustnej. Leczenie
