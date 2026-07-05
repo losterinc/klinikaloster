@@ -1,6 +1,6 @@
 ---
 order: 1
-name: prof. dr hab. n. med. Bartłomiej W. Loster
+name: Prof. dr hab. n. med. Bartłomiej W. Loster
 title: Specjalista ortodonta
 specialties:
   - Ortodoncja
