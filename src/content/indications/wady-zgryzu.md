@@ -2,7 +2,7 @@
 order: 2
 title: Wyraźne stłoczenie zębów
 summary: ''
-image: /uploads/Gemini_Generated_Image_rtd8oortd8oortd8.png
+image: /uploads/Ikona---Wyraźne-stłoczenie-zębów.png
 homepage: true
 draft: false
 ---
