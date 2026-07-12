@@ -4,7 +4,7 @@ name: Aparat nakładkowy
 description: Niemal niewidoczne, zdejmowane nakładki korygujące ustawienie zębów.
 price: wycena indywidualna
 category: Leczenie
-homepage: true
+homepage: false
 ---
 
 Przezroczyste nakładki to dyskretna i wygodna alternatywa dla aparatu stałego.
