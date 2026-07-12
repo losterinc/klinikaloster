@@ -2,7 +2,7 @@
 order: 3
 title: Przechylenie górnych zębów siecznych
 summary: ''
-image: /uploads/b8c55f70-747a-4c9f-96b9-7d65b5e4125c.jpeg
+image: /uploads/Ikona-pierwsza.png
 homepage: true
 draft: false
 ---
