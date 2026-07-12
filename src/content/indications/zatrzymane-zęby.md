@@ -2,7 +2,7 @@
 order: 11
 title: Zatrzymane zęby
 summary: ''
-image: ''
+image: /uploads/Ikona---zatrzymany.png
 homepage: true
 draft: false
 ---
