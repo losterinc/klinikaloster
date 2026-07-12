@@ -2,7 +2,7 @@
 order: 7
 title: Brak bocznych zębów siecznych
 summary: ''
-image: ''
+image: /uploads/Ikona---Brak-górnych-bocznych-zębów-siecznych.png
 homepage: true
 draft: false
 ---
