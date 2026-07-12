@@ -2,7 +2,7 @@
 order: 5
 title: Ujemny nagryz poziomy
 summary: ''
-image: /uploads/Gemini_Generated_Image_58bbg558bbg558bb.png
+image: /uploads/Ikona---Ujemny-nagryz-poziomy.png
 homepage: true
 draft: false
 ---
