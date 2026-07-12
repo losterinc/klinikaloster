@@ -2,7 +2,7 @@
 order: 8
 title: Zgryz krzyżowy lub przewieszony
 summary: ''
-image: ''
+image: /uploads/Ikona---zgryz-krzyżowy-lub-przewieszony-okr.png
 homepage: true
 draft: false
 ---
