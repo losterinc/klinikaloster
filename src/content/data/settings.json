@@ -21,10 +21,14 @@
     "openingHours": [
       {
         "days": "Poniedziałek–Piątek",
-        "hours": "9:00–18:00"
+        "hours": "8:30–19:30"
       },
       {
-        "days": "Sobota–Niedziela",
+        "days": "Sobota",
+        "hours": "8:30-13:30"
+      },
+      {
+        "days": "Niedziela",
         "hours": "Nieczynne"
       }
     ],
