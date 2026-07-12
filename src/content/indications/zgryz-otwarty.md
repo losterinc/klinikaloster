@@ -2,7 +2,7 @@
 order: 9
 title: Zgryz otwarty
 summary: ''
-image: ''
+image: /uploads/Ikona---zgryz-otwarty.png
 homepage: true
 draft: false
 ---
