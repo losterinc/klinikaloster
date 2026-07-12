@@ -2,7 +2,7 @@
 order: 4
 title: Zgryz głęboki
 summary: ''
-image: ''
+image: /uploads/Ikona---Zgryz-głęboki.png
 homepage: true
 draft: false
 ---
