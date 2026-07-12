@@ -2,7 +2,7 @@
 order: 10
 title: Atrycja zębów
 summary: ''
-image: ''
+image: /uploads/Ikona---Atrycja-zębów.png
 homepage: true
 draft: false
 ---
