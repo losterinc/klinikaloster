@@ -1,7 +1,7 @@
 ---
 title: Świadczenia
 heroTitle: Realizowane świadczenia
-heroSubtitle: Zakres usług ortodontycznych wraz z orientacyjnym cennikiem.
+heroSubtitle: Leczenie ortodontyczne, protetyczne, implantoprotetyczne i zachowawcze
 heroImage: /uploads/139999362_1886607291492761_1730710509438445964_n.jpg
 bookingTitle: ''
 seo:
