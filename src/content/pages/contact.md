@@ -1,7 +1,7 @@
 ---
 title: Kontakt
 heroTitle: Kontakt
-heroSubtitle: Wizyty tylko po wcześniejszej rezerwacji telefonicznej lub za pośrednictwem elektronicznego formularza zgłoszeniowego
+heroSubtitle: Wizyty tylko po wcześniejszej rezerwacji telefonicznej
 heroImage: /uploads/139999362_1886607291492761_1730710509438445964_n.jpg
 heroSecondaryImage: ''
 bookingTitle: ''
