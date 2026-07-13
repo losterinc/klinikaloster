@@ -4,7 +4,7 @@ name: Planowanie leczenia ortodontycznego
 description: planowanie
 price: od 150 zł
 category: 02 Diagnostyka
-homepage: false
+homepage: true
 ---
 
 Podczas konsultacji lekarz przeprowadza badanie, ocenia stan zgryzu oraz omawia
