@@ -3,7 +3,7 @@ order: 1
 name: Konsultacja ortodontyczna
 description: Pierwsza wizyta z badaniem, oceną zgryzu i propozycją planu leczenia.
 price: od 150 zł
-category: Diagnostyka
+category: 02 Diagnostyka
 homepage: false
 ---
 
