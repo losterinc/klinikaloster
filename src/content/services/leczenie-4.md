@@ -1,5 +1,5 @@
 ---
-order: 4
+order: 3
 name: Leczenie 4
 description: TBD.
 price: ''
