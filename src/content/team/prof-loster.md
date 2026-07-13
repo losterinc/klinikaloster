@@ -3,8 +3,7 @@ order: 1
 name: Prof. dr hab. n. med. Bartłomiej W. Loster
 title: Specjalista ortodonta
 specialties:
-  - Ortodoncja
-  - Leczenie wad zgryzu u dorosłych
+  - Leczenie ortodontyczne
 photo: /uploads/Screenshot 2026-06-18 at 15.36.55.png
 draft: false
 ---
