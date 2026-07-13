@@ -3,7 +3,7 @@ order: 2
 name: Dr hab. n. med. Jolanta Loster⁠
 title: Specjalista protetyki stomatologicznej
 specialties:
-  - Aparaty stałe i nakładkowe
+  - Leczenie protetyczne
 photo: /uploads/Screenshot 2026-06-18 at 15.37.48.png
 draft: false
 ---
