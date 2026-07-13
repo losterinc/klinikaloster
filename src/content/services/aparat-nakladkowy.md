@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 2
 name: Aparat nakładkowy
 description: Niemal niewidoczne, zdejmowane nakładki korygujące ustawienie zębów.
 price: wycena indywidualna
