@@ -3,6 +3,6 @@ order: 4
 name: Omówienie planu
 description: Omówienie
 price: ''
-category: Diagnostyka
+category: 01 Diagnostyka
 homepage: false
 ---
