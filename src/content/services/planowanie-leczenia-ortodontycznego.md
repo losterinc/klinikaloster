@@ -3,7 +3,7 @@ order: 3
 name: Planowanie leczenia ortodontycznego
 description: planowanie
 price: od 150 zł
-category: Diagnostyka
+category: 01 Diagnostyka
 homepage: false
 ---
 
