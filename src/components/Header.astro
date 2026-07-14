@@ -15,10 +15,10 @@ const { locale, clinicName, clinicLogoImage, facebookUrl, alternates } = Astro.p
 const t = useTranslations(locale);
 
 const nav = [
-  { href: localePath(locale, 'services'), label: t('nav.services') },
+  { href: localePath(locale, 'contact'), label: t('nav.contact') },
   { href: localePath(locale, 'indications'), label: t('nav.indications') },
   { href: localePath(locale, 'team'), label: t('nav.team') },
-  { href: localePath(locale, 'contact'), label: t('nav.contact') },
+  { href: localePath(locale, 'services'), label: t('nav.services') },
 ];
 
 const current = Astro.url.pathname;
