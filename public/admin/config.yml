@@ -93,9 +93,9 @@ collections:
     sortable_fields: [order]
     reorder: true
     fields:
-      - { name: name, label: Imię i nazwisko, widget: string }
-      - { name: title, label: Tytuł / stanowisko, widget: string }
-      - { name: specialties, label: Specjalizacje, widget: list, field: { name: item, label: Specjalizacja, widget: string }, i18n: true, required: [pl] }
+      - { name: name, label: Tytuł imię i nazwisko, widget: string }
+      - { name: title, label: Specjalizacja, widget: string }
+      - { name: specialties, label: Realizowane świadczenia, widget: list, field: { name: item, label: Świadczenie, widget: string }, i18n: true, required: [pl] }
       - { name: photo, label: Zdjęcie, widget: image, required: false, i18n: duplicate }
       # Kolejność ustawiana przez przeciąganie na liście wpisów (reorder); ukryta w edytorze.
       - { name: order, label: Kolejność, widget: hidden, default: 0, i18n: duplicate }
