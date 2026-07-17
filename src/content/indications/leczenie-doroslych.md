@@ -2,7 +2,7 @@
 order: 1
 title: Powiększony nagryz poziomy
 summary: ''
-image: /uploads/Ikona---powiększony-nagryz-poziomy.png
+image: /uploads/Gemini_Generated_Image_jfodaojfodaojfod.png
 homepage: true
 draft: false
 ---
