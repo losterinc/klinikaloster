@@ -3,7 +3,7 @@ order: 8
 name: Lek. dent. Kacper Loster
 title: Rezydent ortodoncji
 specialties: []
-photo: ''
+photo: /uploads/pasted-image-1784748803144.png
 draft: false
 ---
 
